@@ -95,7 +95,7 @@
 
       let li = document.createElement('li');
 
-      li.innerText='1221';
+      li.innerText='hovered!';
 
       li.classList.add(arr[rndm]);
 
@@ -174,7 +174,11 @@
     var counter = 0;
     document.querySelector('#keyboardResult').innerText = 0;
     document.querySelector('#keyboardResult').className ="resultBlock key-colors zero";
-    keyboardButton.onkeydown = function(){ console.log('123');
+    keyboardButton.onkeydown = function(){
+      
+        ++counter;
+        document.querySelector('#keyboardResult').innerText = counter;
+
   let resStr = '';
       for(let i=0;i<document.querySelector('#keyboardResult').innerText.toString().length;i++){
         switch(document.querySelector('#keyboardResult').innerText.toString().charAt(i)){
@@ -221,11 +225,6 @@
       }
       document.querySelector('#keyboardResult').className ="resultBlock key-colors "+resStr;
      }
-
-      document.addEventListener('keypress', (event) => {
-        ++counter;
-        document.querySelector('#keyboardResult').innerText = counter;
-      });
 
     function getRandomIntInclusive(min,max) {
       min = Math.ceil(min);
