@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+function spinalCase(str) {
+        let test = str.replaceAll(' ', '-').replaceAll("_","-").split(/(?=[A-Z])/);
+        let tmp='';
+
+    for(let i=0;i<test.length;i++ ){
+        if(test[i].charAt(test[i].length-1)!='-'){
+                tmp += test[i]+'-';
+        }
+        else{
+            tmp += test[i];
+        }
+        if(tmp.charAt(tmp.length-1)=="-"){
+            tmp.slice(0, -1);
+        }
+    }
+    str = tmp.toLowerCase().slice(0, -1);
+   return str;
+}
+
+spinalCase("The_Andy_Griffith_Show");
+</script>

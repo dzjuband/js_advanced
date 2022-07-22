@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+function pairElement(str) {
+    var resArray=[];
+    for(let i=0;i<str.length;i++ ){
+        if(str.charAt(i) == 'A'){
+            resArray.push(["A","T"]); continue; 
+        }
+        if(str.charAt(i) == 'T'){
+            resArray.push(["T","A"]); continue; 
+        }
+        if(str.charAt(i) == 'C'){
+            resArray.push(["C","G"]); continue; 
+        }
+        if(str.charAt(i) == 'G'){
+            resArray.push(["G","C"]); continue; 
+        }
+        if(str.charAt(i) == 'A'){
+            cresArray.push(["A","T"]); continue; 
+        }
+    }
+  return resArray;
+}
+
+pairElement("CTCTA");
+</script>

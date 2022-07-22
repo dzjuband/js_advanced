@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+function sumAll(arr) {
+  var first = arr[0];
+  var second = arr[1];
+  var tmpres = 0;
+  if(first>second){
+    for(let i=second;i<=first;i++){
+      tmpres+=i;
+    }
+    return tmpres;
+  }
+
+  if(second>first){
+    for(let i = first;i<=second;i++){
+      tmpres+=i;
+    }
+    return tmpres;
+  }
+}
+
+sumAll([1, 4]);
+</script>

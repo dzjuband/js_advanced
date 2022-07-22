@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function translatePigLatin(str) {
+    var vowels = ["a","e","i","o","u"]; 
+    var tmp = '';
+    let res =''
+    if(vowels.lastIndexOf(str.charAt(0))>=0){//голосна
+
+        res+= str+'way';
+    }
+    else{//приголосна
+        for(let a=0;a<str.length;a++){
+            if(vowels.lastIndexOf(str.charAt(a))<0){
+                tmp+=str.charAt(a)
+            }
+            else{
+                break;
+            }
+        }
+        res = str.replace(tmp, '')+tmp+'ay'; 
+        console.log(res);
+    }
+  return res;
+}
+translatePigLatin("rhythm");
+
+</script>

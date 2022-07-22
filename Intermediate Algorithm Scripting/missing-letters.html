@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+function fearNotLetter(str) {
+ var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+ var start = 0;
+ var end = 0;
+
+  for(let i=0;i<alphabet.length;i++){
+    if(alphabet.charAt(i).charCodeAt(0) === str.charAt(0).charCodeAt(0) ){
+        start = i;
+        end = str.length;
+    }
+  }
+  
+  let alphaSubstr = alphabet.slice(start,end+start);
+
+  for(let i=0;i<str.length;i++){
+    if(alphaSubstr.charAt(i)!=str.charAt(i)){
+        str = alphaSubstr.charAt(i);break;
+    }
+  }
+  console.log(str);
+  return (str.length == 26 ) ? undefined : str;
+}
+
+fearNotLetter("abcdefghijklmnopqrstuvwxyz");
+</script>
