@@ -25,6 +25,35 @@
   </div>
 
   <script>
+    let popup__buttons = document.querySelectorAll('.popup__button');
+    let popup = document.querySelector('#popup');
+    let popup__items = document.querySelectorAll('.popup__item');
+
+    popup__buttons.forEach(function(item, i, popup__buttons) {
+      item.addEventListener('click', function(){
+        let dset = item.dataset.popup;
+
+        document.querySelectorAll('.popup__item').forEach(function(item){
+          if(item.dataset.popup == dset){
+            item.style.display = "block"; 
+            document.querySelector('#popup').style.display="block";
+          }
+          else{
+            item.style.display = "none"; 
+          }
+        });
+
+      })
+    });
+  
+
+
+    let popup__close = document.querySelector('#popup__close');
+
+    popup__close.addEventListener('click', function(){
+
+      document.querySelector('#popup').style.display="none";
+    })
     /*
 
        Завдання: Зробити коректне спливаюче вікно.
