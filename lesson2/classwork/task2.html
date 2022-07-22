@@ -146,21 +146,93 @@
 
     }
 
-
+    let lightResult = document.querySelector('#lightResult');
+    
     mouseLight.onclick = function(e){
-        console.log('light');
+       
+       if(lightResult.innerText == ""){
+        lightResult.innerText = "Off";return;
+       }
+       
+       if(lightResult.innerText == "Off"){
+        lightResult.innerText = "Red";return;
+       }
+
+       if(lightResult.innerText == "Red"){
+        lightResult.innerText = "Yellow";return;
+       }
+
+       if(lightResult.innerText == "Yellow"){
+        lightResult.innerText = "Green";return;
+       }
+
+       if(lightResult.innerText == "Green"){
+        lightResult.innerText = "Off";return;
+       }
     }
 
     var counter = 0;
-    keyboardButton.onkeydown = function(){
-        console.log('keydown');
-    }
+    document.querySelector('#keyboardResult').innerText = 0;
+    document.querySelector('#keyboardResult').className ="resultBlock key-colors zero";
+    keyboardButton.onkeydown = function(){ console.log('123');
+  let resStr = '';
+      for(let i=0;i<document.querySelector('#keyboardResult').innerText.toString().length;i++){
+        switch(document.querySelector('#keyboardResult').innerText.toString().charAt(i)){
+          case '1': {
+            resStr+="one ";break;
+          }
+          
+          case '2': {
+            resStr+="two "; break;
+          }
+
+          case '3': {
+            resStr+="three ";break;
+          }
+
+          case '4': {
+            resStr+="four ";break;
+          }
+
+          case '5': {
+            resStr+="five ";break;
+          }
+
+          case '6': {
+            resStr+="six ";break;
+          }
+
+          case '7': {
+            resStr+="seven ";break;
+          }
+
+          case '8': {
+            resStr+="eight ";break;
+          }
+          
+          case '9': {
+            resStr+="nine ";break;
+          }
+
+          case '0': {
+            resStr+="zero ";break;
+          }
+        }
+      }
+      document.querySelector('#keyboardResult').className ="resultBlock key-colors "+resStr;
+     }
+
+      document.addEventListener('keypress', (event) => {
+        ++counter;
+        document.querySelector('#keyboardResult').innerText = counter;
+      });
 
     function getRandomIntInclusive(min,max) {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
   </script>
 </body>
 </html>
