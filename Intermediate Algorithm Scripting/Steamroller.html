@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function steamrollArray(arr) {
+    let tmpArr = [];
+    for(let i=0;i<arr.length;i++){
+        
+        if( typeof arr[i] === 'object' && !Array.isArray(arr[i])){
+            tmpArr.push(arr[i]);
+        }
+        else{
+           if(arr[i].toString().indexOf(',') == -1){
+            if(arr[i].toString()==""){
+                continue;
+            }
+                           
+           }
+           if(arr[i].toString().indexOf(',') == -1){
+            if(isNaN(parseInt(arr[i].toString())) === false){
+                tmpArr.push(parseInt(arr[i].toString()));
+            }
+            else{
+                tmpArr.push(arr[i].toString());
+            }
+            
+           }
+           else{
+                let tmp = arr[i].toString().split(',');
+                for(let k=0;k<tmp.length;k++){
+                    if(isNaN(parseInt(arr[i].toString())) === false){
+                        tmpArr.push(parseInt(tmp[k].toString()));
+                    }
+                    else{
+                        tmpArr.push(tmp[k].toString());
+                    }
+                }
+           }
+        }
+    }
+  return tmpArr;
+}
+
+console.log(steamrollArray([1, [], [3, [[4]]]]));
+
+</script>
