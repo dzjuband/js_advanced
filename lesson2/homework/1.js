@@ -35,14 +35,47 @@
 
       element.onclick = function(event) {
         // do stuff ...
-      }
+      }s
 
   */
       window.addEventListener('load', function () {
+       
+        let tabs = document.querySelectorAll('.tab');
         let showButtons = document.querySelectorAll('.showButton');
+        let buttonContainer = document.querySelector('#buttonContainer');
+        let newButton =document.createElement('button');
+
         showButtons.forEach(item => item.addEventListener('click', function(){
-          let tmp =this.dataset.tab;
-          let tabContainer = document.querySelector('#tabContainer');
-          console.log(tabContainer);
-        }));
-      })
+          let tmp = this.dataset.tab;//save data-attriute
+         
+          tabs.forEach(function(elem){
+            if(elem.dataset.tab == tmp){
+              elem.classList.add('active');
+            }
+            else{
+              elem.classList.remove('active');
+            }
+          });
+      
+      }));
+
+      addButtonClear();
+
+
+      newButton.addEventListener('click', function(){
+        hideAllTabs();
+      });
+
+      function hideAllTabs(){
+        tabs.forEach(function(elem){
+          elem.classList.remove('active');
+      });
+      }
+
+      function addButtonClear(){
+        buttonContainer.appendChild(newButton);
+        newButton.classList.add('showButton');
+        newButton.innerText='clear All';
+        newButton.id ='clearAll';
+      }
+  });
