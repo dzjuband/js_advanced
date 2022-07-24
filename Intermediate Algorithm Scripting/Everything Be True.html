@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function truthCheck(collection, pre) {
+    let arr = [];
+    collection.forEach(element => {
+        arr.push(element[pre]);
+    });
+    let check = true;
+    for(let i=0;i<arr.length;i++){
+        check = new Boolean(arr[i]);
+        if(check == false){
+            return false;
+        }
+    }
+    if (check){
+        return true; 
+    }
+  
+}
+
+console.log(truthCheck([{name: "Quincy", role: "Founder", isBot: false}, {name: "Naomi", role: "", isBot: false}, {name: "Camperbot", role: "Bot", isBot: true}], "isBot") );
+</script>
