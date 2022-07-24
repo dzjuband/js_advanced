@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function smallestCommons(arr) {
+    let first = arr[0];
+    let second = arr[1];
+    let arrNumbrs = [];
+    if(first<second){
+        for(let i = first;i<=second;i++){
+            arrNumbrs.push(i);
+        }
+    }
+    else{
+        for(let i = second;i <= first;i++){
+            arrNumbrs.push(i);
+        }
+    }
+
+    let res=0;
+    let maxVal = Math.max.apply(null, arrNumbrs);
+    while(true){
+    if(arrNumbrs.every((b)=>maxVal%b==0)) {
+      return maxVal; break;
+    }
+    else maxVal++;
+
+    }
+}
+
+console.log(smallestCommons([7,5]));
+
+</script>
