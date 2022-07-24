@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function whatIsInAName(collection, source) {
+  const arr = [];
+  // Only change code below this line
+  let props = Object.getOwnPropertyNames(source);
+    for(let i=0;i<Object.keys(collection).length;i++){
+        let check = true;
+        for(let j=0;j<props.length;j++){
+            if(collection[i].hasOwnProperty(props[j]) !=true){
+                check = false; break;
+            }
+        }
+        if(check){
+            let check_values = true; 
+            for(let k=0;k<props.length;k++){
+                if(source[props[k]] != collection[i][props[k]]){
+                    check_values=false;
+                }
+            }
+            if(check_values == true){
+                arr.push(collection[i]);
+            }
+        }
+    }
+  // Only change code above this line
+  return arr;
+}
+
+console.log(whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3}));
+</script>    
