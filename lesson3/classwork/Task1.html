@@ -51,9 +51,30 @@
           Получить значение инпута: Receiver.value [Receiver - это id]
 
       */
+      let doWork  = function(){
+          if(ListCount>=5){
+            AddToList.removeEventListener('click',doWork);
+            AddToList.disabled = true;
+            Receiver.value = '';  
+          }
+          if(ListCount<5){
+            let tmpli = document.createElement('li');
+            tmpli.innerHTML = Receiver.value;
+            list.appendChild(tmpli);
+            Receiver.value = '';  
+            ListCount++;
+          }
+         
+        }
 
       var ListCount = 0;
+      let Receiver = document.querySelector('#Receiver');
+      let list = document.querySelector('#list');
+      let AddToList = document.querySelector('#AddToList');
 
+        let click = AddToList.addEventListener('click', doWork);
+
+      
     </script>
   </body>
 

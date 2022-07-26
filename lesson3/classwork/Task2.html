@@ -32,7 +32,7 @@
 
         Под иконкой расположить еще одну кнопку, по нажатию на которую из соответствующего массива
         подтягивается случайная картинка с изображением в блок result.
-        Предыдущий результат очищается.
+        Предыдущий результат очищается.*/
 
         var houseArray = [
         "https://static.pexels.com/photos/106399/pexels-photo-106399.jpeg",
@@ -47,21 +47,21 @@
       var treeArray = [
         "https://static.pexels.com/photos/56875/tree-dawn-nature-bucovina-56875.jpeg",
         "https://c1.staticflickr.com/8/7218/7184786016_1ddab461e8_b.jpg",
-        "http://www.atzmut.com/wp-content/uploads/2016/01/tree.jpg"
+        "https://d32qe1r3a676y7.cloudfront.net/eyJidWNrZXQiOiJibG9nLWVjb3RyZWUiLCJrZXkiOiAiYmxvZy8wMDAxLzAxL2FkNDZkYmI0NDdjZDBlOWE2YWVlY2Q2NGNjMmJkMzMyYjBjYmNiNzkuanBlZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6IDkwMCwiaGVpZ2h0IjowLCJmaXQiOiJjb3ZlciJ9fX0="
       ];
 
-      */
 
       var buttons = document.querySelectorAll('button');
       var iconBlock = document.getElementById('chooseYourBlock');
       var resultBlock = document.getElementById('result');
+      let newIMG = document.createElement('img');
 
       console.log(buttons);
 
       var iconsObj = {
-        house:  'https://image.flaticon.com/icons/svg/149/149064.svg',
-        tree: 'https://image.flaticon.com/icons/svg/620/620705.svg',
-        plane: 'https://image.flaticon.com/icons/svg/579/579268.svg'
+        house:  './icons/free-icon-fire-extinguisher-7374057.png',
+        tree: './icons/free-icon-hurricane-7374200.png',
+        plane: './icons/free-icon-meteorite-7374048.png'
       }
 
       function showIcon(e){
@@ -71,8 +71,69 @@
       }
 
       buttons.forEach( (btn) => {
-        //alert('working')
+        btn.addEventListener('click', function(){
+          resultBlock.innerHTML  = '';
+          if(this.innerText == "House"){
+            newIMG.src= iconsObj.house;
+            newIMG.removeAttribute('class');
+            newIMG.classList.add("imgClass")
+            newIMG.classList.add("House")
+          }
+          if(this.innerText == "Tree"){
+            newIMG.src= iconsObj.tree;
+            newIMG.removeAttribute('class');
+            newIMG.classList.add("imgClass")
+            newIMG.classList.add("Tree")
+          }
+          if(this.innerText == "Plane"){
+            newIMG.src= iconsObj.plane;
+            newIMG.removeAttribute('class');
+            newIMG.classList.add("imgClass");
+            newIMG.classList.add("Plane")
+          }
+          
+          if( document.body.contains(document.querySelector('#newBtn')) ){
+            document.querySelector('#newBtn').remove()
+          }
+
+          newIMG.style.display='block';
+          iconBlock.appendChild(newIMG);
+         
+          let imgClass = document.querySelector(".imgClass");
+          let newBtn = document.createElement('button');
+          newBtn.style.marginTop="10px";
+          newBtn.id="newBtn";
+          newBtn.innerHTML="button";
+          newBtn.addEventListener('click',function(){
+            let randNum =  getRand();
+            resultBlock.innerHTML  = '';
+            if(document.querySelector('.imgClass').classList.contains('Tree')){
+              let ttt = document.createElement('img');
+              ttt.src=treeArray[randNum];
+              ttt.style.width="400px";ttt.style.heigth ="400px";
+              resultBlock.appendChild(ttt);
+            }
+            if(document.querySelector('.imgClass').classList.contains('House')){
+              let ttt = document.createElement('img');
+              ttt.src=houseArray[randNum];
+              ttt.style.width="400px";ttt.style.heigth ="400px";
+              resultBlock.appendChild(ttt);
+            }
+            if(document.querySelector('.imgClass').classList.contains('Plane')){
+              let ttt = document.createElement('img');
+              ttt.src=planeArray[randNum];
+              ttt.style.width="400px";ttt.style.heigth ="400px";
+              resultBlock.appendChild(ttt);
+            }
+
+          });
+          imgClass.after(newBtn);
+        })
       })
+
+      function getRand(){
+        return Math.floor(Math.random() * 3);
+      }
     </script>
   </body>
 </html>
