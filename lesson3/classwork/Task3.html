@@ -71,25 +71,33 @@
 
     </div>
     <script>
-      let navButton = document.querySelectorAll('.navButton');
-      navButton.forEach((element) => {
-        let color = element.closest('.roadMap__container').classList[1];//color
-        element.addEventListener('click',function(){
-        let self = this;
-        let dataSet=0;
-        if(this.innerText =="Prev"){ 
-         let roadMapPoint = self.nextElementSibling.querySelectorAll('.roadMapPoint');
-         roadMapPoint.forEach((element) => {
-            if(element.classList.contains('ball')){
-              if(element.dataset.id!=1){
-                dataSet = element.dataset.id;
-                element.removeAttribute('class');element.classList.add('roadMapPoint');
+      let navButton = document.querySelectorAll('.navButton');//беремо всі кнопки для того, що повісити на них обробники
+      navButton.forEach((element) => {// ідемо по масиву кнопок
+        let color = element.closest('.roadMap__container').classList[1];//отримуємо колір(другий клас), бо різна кількість точок в класах
+        element.addEventListener('click',function(){// навішуємо обробник подій для кожної кнопки
+        let self = this;//отримуємо поточний обєкт на якому буде відбуватись подія (одна з кнопок)
+        let dataSet=0; // змінна - вказівник, яка вказує на поточку позицію класу ball
+        if(this.innerText =="Prev"){ //визначаємо яка саме кнопка була натиснута (вперед чи назад)
+         let roadMapPoint = self.nextElementSibling.querySelectorAll('.roadMapPoint');//якщо натиснута кнопка Prev, то я знаю, що під нею є елемент .roadMap, а в нього .roadMapPoint(отримую список поінтів)
+         roadMapPoint.forEach((element) => {//цикл по поінтам для перевірки де зараз стоїть активний клас з кулькою
+            if(element.classList.contains('ball')){ //Якщо знайшов такий поінт
+              if(element.dataset.id!=1){ // необхідно змістити, але перед цим я перевіряю, що це не перший елемент, бо попереду першого - пусто
+                dataSet = element.dataset.id; //беру дата-сет атрут(число), той який зараз має активний клас
+                element.removeAttribute('class');// видаляю всі класи, для того, щоб видалити клас ball (можна зробити красивіше)
+                element.classList.add('roadMapPoint');//додаю назад дефолтний клас
+              }
+              else{//Якщо це як раз перший елемент, пере яким немає ніякого іншого ітему
+                
+                  dataSet = roadMapPoint.length+1;// беремо кількість ітемів і присвоюємо його в dataSet(хочу перемйти на останній елемент) +1 бо буде переходити не на останній елемент а на передостанній
+                  console.log(roadMapPoint.length);
+                  element.removeAttribute('class');// видаляю всі класи, для того, щоб видалити клас ball (можна зробити красивіше)
+                  element.classList.add('roadMapPoint');//додаю назад дефолтний клас
               }
             }
          });
 
-         roadMapPoint.forEach((element) => {
-          if(element.dataset.id == dataSet-1){
+         roadMapPoint.forEach((element) => {// іду по всім поінтам, які є і звіряю в якого саме поінта дата-сет атрибут буде мати таке саме значення, як і в змінній dataSet
+          if(element.dataset.id == dataSet-1){ //dataSet-1 присвоїти активний клас попередньому елементу від поточного
             element.classList.add('ball')
           }
          })
@@ -99,14 +107,22 @@
           let roadMapPoint = self.previousElementSibling.querySelectorAll('.roadMapPoint');
           roadMapPoint.forEach((element) => {
               if(element.classList.contains('ball')){
-                //if(element.dataset.id!=8){
+                if(color == "yellow" && element.dataset.id !=8 || color != "yellow" && element.dataset.id != 4){//тут я отримав color для того, щоб взнати скільки поінтів у мене буде (завязався на колір)
                   dataSet = element.dataset.id;
-                  element.removeAttribute('class');element.classList.add('roadMapPoint');
-                //}
+                  element.removeAttribute('class');
+                  element.classList.add('roadMapPoint');
+                }
+                else{
+                  dataSet = 0;
+                  element.removeAttribute('class');
+                  element.classList.add('roadMapPoint');
+                }
+                  
               }
           });
+          ++dataSet;
           roadMapPoint.forEach((element) => {
-          if(element.dataset.id.charAt(0) == (dataSet+1).charAt(0)){ console.log('123');  
+          if(element.dataset.id == dataSet){
             element.classList.add('ball')
           }
          })
