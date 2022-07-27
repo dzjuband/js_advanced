@@ -71,7 +71,49 @@
 
     </div>
     <script>
+      let navButton = document.querySelectorAll('.navButton');
+      navButton.forEach((element) => {
+        let color = element.closest('.roadMap__container').classList[1];//color
+        element.addEventListener('click',function(){
+        let self = this;
+        let dataSet=0;
+        if(this.innerText =="Prev"){ 
+         let roadMapPoint = self.nextElementSibling.querySelectorAll('.roadMapPoint');
+         roadMapPoint.forEach((element) => {
+            if(element.classList.contains('ball')){
+              if(element.dataset.id!=1){
+                dataSet = element.dataset.id;
+                element.removeAttribute('class');element.classList.add('roadMapPoint');
+              }
+            }
+         });
 
+         roadMapPoint.forEach((element) => {
+          if(element.dataset.id == dataSet-1){
+            element.classList.add('ball')
+          }
+         })
+        }
+        if(this.innerText =="Next"){
+
+          let roadMapPoint = self.previousElementSibling.querySelectorAll('.roadMapPoint');
+          roadMapPoint.forEach((element) => {
+              if(element.classList.contains('ball')){
+                //if(element.dataset.id!=8){
+                  dataSet = element.dataset.id;
+                  element.removeAttribute('class');element.classList.add('roadMapPoint');
+                //}
+              }
+          });
+          roadMapPoint.forEach((element) => {
+          if(element.dataset.id.charAt(0) == (dataSet+1).charAt(0)){ console.log('123');  
+            element.classList.add('ball')
+          }
+         })
+        }
+        
+      });
+      })
       /*
         Задание:
 
@@ -82,9 +124,9 @@
 
       var containers = document.querySelectorAll('.roadMap__container');
           containers.forEach( function( container ){
-            console.log( container );
+
             var ball = container.querySelector('.ball');
-            console.log( ball.dataset.id );
+         
           })
 
     </script>
