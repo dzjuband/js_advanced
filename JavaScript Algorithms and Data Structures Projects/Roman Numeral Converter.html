@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function convertToRoman(num) {
+        let resStr = [];
+
+        for(let i=num.toString().length-1;i>=0;i--){
+        if(i == num.toString().length-1){ 
+            if(num.toString().charAt(i) == '1'){
+                resStr.push('I'); 
+            }
+            if(num.toString().charAt(i) == '2'){
+                resStr.push('II');
+            }
+            if(num.toString().charAt(i) == '3'){
+                resStr.push('III');
+            }
+            if(num.toString().charAt(i) == '4'){
+                resStr.push('IV');
+            }
+            if(num.toString().charAt(i) == '5'){
+                resStr.push('V');
+            }
+            if(num.toString().charAt(i) == '6'){
+                resStr.push('VI');
+            }
+            if(num.toString().charAt(i) == '7'){
+                resStr.push('VII');
+            }
+            if(num.toString().charAt(i) == '8'){
+                resStr.push('VIII');
+            }
+            if(num.toString().charAt(i) == '9'){
+                resStr.push('IX');
+            }
+        }
+        if(i == num.toString().length-2){
+            if(num.toString().charAt(i) == '1'){
+                resStr.push('X'); 
+            }
+            if(num.toString().charAt(i) == '2'){
+                resStr.push('XX');
+            }
+            if(num.toString().charAt(i) == '3'){
+                resStr.push('XXX');
+            }
+            if(num.toString().charAt(i) == '4'){
+                resStr.push('XL');
+            }
+            if(num.toString().charAt(i) == '5'){
+                resStr.push('L');
+            }
+            if(num.toString().charAt(i) == '6'){
+                resStr.push('LX');
+            }
+            if(num.toString().charAt(i) == '7'){
+                resStr.push('LXX');
+            }
+            if(num.toString().charAt(i) == '8'){
+                resStr.push('LXXX');
+            }
+            if(num.toString().charAt(i) == '9'){
+                resStr.push('XC');
+            }
+        }
+        if(i == num.toString().length-3){
+            if(num.toString().charAt(i) == '1'){
+                resStr.push('C'); 
+            }
+            if(num.toString().charAt(i) == '2'){
+                resStr.push('CC');
+            }
+            if(num.toString().charAt(i) == '3'){
+                resStr.push('CCC');
+            }
+            if(num.toString().charAt(i) == '4'){
+                resStr.push('CD');
+            }
+            if(num.toString().charAt(i) == '5'){
+                resStr.push('D');
+            }
+            if(num.toString().charAt(i) == '6'){
+                resStr.push('DC');
+            }
+            if(num.toString().charAt(i) == '7'){
+                resStr.push('DCC');
+            }
+            if(num.toString().charAt(i) == '8'){
+                resStr.push('DCCC');
+            }
+            if(num.toString().charAt(i) == '9'){
+                resStr.push('CM');
+            }
+                
+        }
+        if(i == num.toString().length-4){
+            if(num.toString().charAt(i) == '1'){
+                resStr.push('M'); 
+            }
+            if(num.toString().charAt(i) == '2'){
+                resStr.push('MM');
+            }
+            if(num.toString().charAt(i) == '3'){
+                resStr.push('MMM');
+            }
+            if(num.toString().charAt(i) == '4'){
+                resStr.push('MV');
+            }
+            if(num.toString().charAt(i) == '5'){
+                resStr.push('V');
+            }
+            if(num.toString().charAt(i) == '6'){
+                resStr.push('VM');
+            }
+            if(num.toString().charAt(i) == '7'){
+                resStr.push('VMM');
+            }
+            if(num.toString().charAt(i) == '8'){
+                resStr.push('VMMM');
+            }
+            if(num.toString().charAt(i) == '9'){
+                resStr.push('MX');
+            }
+                
+        }
+
+        }
+        return resStr.reverse().join().replaceAll(',','');
+    }
+
+    console.log(convertToRoman(649));
+</script>
