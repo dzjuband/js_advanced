@@ -27,10 +27,12 @@
   let PrevSilde = document.querySelector('#PrevSilde');
 
   NextSilde.addEventListener('click',function(){
-    currentPosition = NextSlide(++currentPosition)
+    currentPosition = NextSlide(++currentPosition);
+
   })
   PrevSilde.addEventListener('click',function(){
-    currentPosition = PrevSlide(--currentPosition)
+    currentPosition = PrevSlide(--currentPosition); 
+    
   })
 
   window.onload = function(){ 
@@ -43,23 +45,22 @@
   }
 
   function NextSlide(item){
-    console.log(item);
+
     RenderImage()
     if(item>OurSliderImages.length-1){
       item=0;
     }
     img.src = OurSliderImages[item];
+
     return item;
   }
 
   function PrevSlide(item){
-    console.log(item);
     RenderImage();
     if(item<0){
-      item=OurSliderImages.length-1;
+      item = OurSliderImages.length-1;
     }
     img.src = OurSliderImages[item];
     return item;
   }
-
   
