@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function telephoneCheck(str) {
+
+    let rule1 = /^1 \([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;//1 (555) 555-5555
+    let rule2 = /^1 [0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;//1 555-555-5555
+    let rule3 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;//5555555555
+    let rule4 = /^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;//555-555-5555
+    let rule5 = /^\([0-9][0-9][0-9]\)[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;//(555)555-5555
+    let rule6 = /^1\([0-9][0-9][0-9]\)[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;//1(555)555-5555
+    let rule7 = /^1 [0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9][0-9]/;//1 555 555 5555
+    let res1 = rule1.test(str);
+    let res2 = rule2.test(str);
+    let res3 = rule3.test(str);
+    let res4 = rule4.test(str);
+    let res5 = rule5.test(str);
+    let res6 = rule6.test(str);
+    let res7 = rule7.test(str);
+    if(res1||res2||res3||res4||res5||res6||res7){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+console.log(telephoneCheck("27576227382"));
+</script>
