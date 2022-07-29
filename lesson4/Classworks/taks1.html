@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+</head>
+<body>
+  <form id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" />
+    <input type="password" name='pas2' placeholder="Повторите пароль" />
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить" disabled/>
+  </form>
+  <script>
+    /*
+          Завдання:
+         Зробити валідацію форми:
+         1. Логін / Пароль не може бути порожнім
+         2. Паролі повинні збігтися
+         3. Поки не варто що користувач згоден з осіб. угодою – кнопка відправки не активна
+
+         + бонус – те поле, яке не пройшло валідацію підсвічувати червоним.
+                 - яке пройшло – підсвічувати зеленим.
+    */
+    document.addEventListener("DOMContentLoaded", function () {
+        let MyValidateForm = document.querySelector('#MyValidateForm');
+        let pas1 = document.querySelector("input[name='pas1']");
+        let pas2 = document.querySelector("input[name='pas2']");
+        let login = document.querySelector("input[name='login']");
+        let agree = document.querySelector('#agree');
+        MyValidateForm.addEventListener('submit',function(e){
+          e.preventDefault();
+           login.className='';
+           pas1.className='';
+           pas2.className='';
+      
+          if(login.value != ''){
+            login.classList.add("OK");
+          }
+          else if(login.value  == ''){
+            login.classList.add("error");
+          }
+
+          if(pas1.value != ''){
+           
+            if(pas1.value != pas2.value){
+
+              pas1.classList.add("error");
+              pas2.classList.add("error");
+            }
+            else{
+              pas1.classList.add("OK");
+              pas2.classList.add("OK");
+            }
+
+          }
+          else if (pas1.value  == ''){
+            pas1.classList.add("error");
+          }
+
+          if(pas2.value != ''){
+              if(pas1.value != pas2.value){
+
+                pas1.classList.add("error");
+                pas2.classList.add("error");
+              }
+              else{
+                pas1.classList.add("OK");
+                pas2.classList.add("OK");
+              }
+          }
+
+          else if(pas2.value == ''){
+            pas2.classList.add("error");
+          }
+
+
+        });
+
+        agree.addEventListener('click',function(e){
+          if(this.checked){
+            submit.disabled=false
+          }
+          else{
+            submit.disabled=true
+          }
+        })
+
+    })
+  </script>
+
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    .OK{
+        border: 1px solid green;
+    }
+  </style>
+</body>
+</html>

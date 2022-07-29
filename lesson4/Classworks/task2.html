@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+        Завдання:
+         Зробити шиблонізатор елемента:
+         Ширині input type=range
+         Колір input type=color
+         Висота input type=number
+         Округлення кутів input type=number
+         Margin input type=number
+
+       Свійсвта: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+
+         + Зробити вибірку кольору з рандомних 20 кольорів які вибираються з блоку, що з'явився:
+         https://s3.envato.com/files/230412754/screenshots/1.png
+         За заготівлю для рандому кольору використовуватимуть функцію з перших занять.
+
+    */
+
+    window.addEventListener("load", function () {
+      let addrange = document.querySelectorAll('input[type="range"]');
+      for(let i =0; i<addrange.length;i++ ){
+        addrange[i].value='0';
+      }
+     
+
+      var myWidth = document.getElementById('myWidth');
+      let result = document.getElementById('result');
+      result.style.background = document.getElementById('myColor').value;
+
+      myWidth.addEventListener('input', function (event) {//Ширині input type=range
+
+        result.style.width = event.target.value + 'px';
+      });
+
+      let myColor =  document.getElementById('myColor');// Колір input type=color
+      myColor.addEventListener("input", function (event) {
+        result.style.background = this.value;
+      });
+
+      let changeHeigth = document.getElementById('changeHeigth');// Висота input type=number
+      changeHeigth.addEventListener("input", function (event) {
+        result.style.height = this.value+"px";
+      });
+
+      let RoundAngle = document.getElementById('RoundAngle');//Округлення кутів input type=number
+      RoundAngle.addEventListener("input", function (event) {
+
+        result.style.borderRadius = this.value+"px";
+      });
+
+      let Margin_input =  document.querySelector('#Margin_input');//Margin input type=number
+      Margin_input.addEventListener("input", function (event) {
+        let numbr = this.value;
+        result.style.marginLeft = numbr+"px";
+        result.style.marginRight = numbr+"px";
+        result.style.marginTop = numbr+"px";
+        result.style.marginBottom = numbr+"px";
+      });
+    });
+
+  </script>
+
+  <style>
+    #test {
+      width: 400px;
+      height: 400px;
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="Templating">
+    <form>
+      <input type="range" id="myWidth" min="0" max="500" step="10" />
+      <input type="color" id="myColor" min="0" max="500" step="10" />
+      <input type="range" id="changeHeigth" min="0" max="500" step="10" />
+      <input type="range" id="RoundAngle" min="0" max="500" step="10" />
+      <input type="range" id="Margin_input" min="0" max="500" step="10" />
+    </form>
+
+    <div class="TemplatingResult">
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+
+  <!-- <div id="test">
+    <span>some test</span>
+  </div> -->
+
+  <style>
+    #colors {
+      width: 200px;
+      
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .result {
+      width: 50px;
+      background: gray;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+    #MyValidateForm {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input {
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      background: #eee;
+      border-radius: 50%;
+    }
+  </style>
+</body>
+
+</html>
