@@ -1,4 +1,154 @@
+let bd = document.querySelector('body');
+let fm =  document.createElement('form');
+fm.id ="MyForm";
+bd.appendChild(fm);
+/*- Ім'я користувача: type:text -> validation: required; minlength = 2;
+            Якщо порожнє вивести повідомлення: "Як тебе звуть друже?!"*/
+let lbl = document.createElement('label');
+let spn = document.createElement('span');
 
+spn.innerHTML="Ім'я користувача";
+spn.style.display="block";
+
+fm.appendChild(lbl);
+lbl.appendChild(spn);
+
+lbl.innerHTML+='<input type="text" id="Uname" minlength = "2" required>';
+/*- Email: type: email -> validation: required; minlength = 3; validEmail;
+            Якщо емейл не валідний вивести повідомлення "Ну й дарма, не отримаєш бандероль із яблуками!"*/
+let EmailLbl = document.createElement('label');
+let EmailSpn = document.createElement('span');
+
+EmailSpn.innerHTML="Email";
+EmailSpn.style.display="block";
+
+fm.appendChild(EmailLbl);
+EmailLbl.appendChild(EmailSpn);
+
+EmailLbl.innerHTML+='<input type="email" id="Uemail" minlength = "3"  required>';
+
+/*Пароль: type: password -> validation: required; minlength = 8; maxlength=16;
+            Якщо пусте вивести повідомлення: "Я нікому не скажу наш секрет";*/
+let pssLbl = document.createElement('label');
+let passSpn = document.createElement('span');
+
+passSpn.innerHTML="Пароль";
+passSpn.style.display="block";
+
+fm.appendChild(pssLbl);//+
+pssLbl.appendChild(passSpn);
+
+pssLbl.innerHTML+='<input type="password" id="Upassword" minlength = "8" maxlength="16" required>';
+/*Кількість з'їдених яблук: type: number -> validation: required; minlength = 1; validNumber;
+            Якщо кількість 0 вивести ерор з повідомленням "Ну хоч поїсти трохи... Яблука смачні"
+        - Дякуємо за яблука: type: text -> validation: required;*/
+let applLbl = document.createElement('label');
+let applSpn = document.createElement('span');
+
+applSpn.innerHTML="Кількість з'їдених яблук";
+applSpn.style.display="block";
+
+fm.appendChild(applLbl);//+
+applLbl.appendChild(applSpn);
+applLbl.innerHTML+='<input min="0" type="number" id="Uapples" minlength = "1" maxlength="16" required>';
+/*Дякуємо за яблука: type: text -> validation: required;
+            Якщо текст !== "дякую" вивести ерор з повідомленням "Фу, невдячний(-а)!" використовуючи setCustomValidity();*/
+let thanksLbl = document.createElement('label');
+let thanksSpn = document.createElement('span');
+
+thanksSpn.innerHTML="Дякуємо за яблука";
+thanksSpn.style.display="block";
+
+fm.appendChild(thanksLbl);//+
+thanksLbl.appendChild(thanksSpn);
+thanksLbl.innerHTML+='<input type="text" id="Uthanks" required>';            
+
+/*згоден на навчання: type: checkbox -> validation: required;
+            Якщо не вибрано вивести ерор з повідомлення: "Неосвічені живуть довше! Добре подумай!"*/
+let teachLbl = document.createElement('label');
+let teachSpn = document.createElement('span');
+
+teachSpn.innerHTML="Згоден на навчання";
+teachSpn.style.display="block";
+
+fm.appendChild(teachLbl);//+
+teachLbl.appendChild(teachSpn);
+
+teachLbl.innerHTML+='<input type="checkbox" id="Uteach" required/><br>';
+
+
+fm.innerHTML+='<input type="submit" style="margin-right:10px" id="submtbuttn" value="Submit">';
+
+
+fm.innerHTML+='<input type="button" id="Validate" value="Validate">';
+
+var pError = document.createElement('p');
+pError.style.background = "red";
+
+fm.appendChild(pError);
+
+let Uname = document.querySelector('#Uname').validity;
+let Uemail = document.querySelector('#Uemail').validity;
+let Upassword = document.querySelector('#Upassword').validity;
+let Uapples = document.querySelector('#Uapples').validity;
+let Uthanks = document.querySelector('#Uthanks').validity;
+
+document.querySelector('#Upassword');
+document.querySelector('#Uapples');
+fm.addEventListener('submit',function(e){
+
+})
+document.querySelector('#Validate').addEventListener('click',function(){
+
+    if(Uname.valueMissing){
+        pError.innerHTML = "Як тебе звуть друже?!";
+        pError.style.visibility='visible';   
+    }
+    else if(Uname.valueMissing == false){
+        pError.style.visibility='hidden';
+    }
+
+    if(Uemail.valid == false){
+        pError.innerHTML = "Ну й дарма, не отримаєш бандероль із яблуками!";
+        pError.style.visibility='visible';
+    }
+    else if(Uemail.valid == true){
+        pError.style.visibility='hidden';
+    }
+
+    if(Upassword.valueMissing){
+        pError.innerHTML = "Я нікому не скажу наш секрет";
+        pError.style.visibility='visible';   
+    }
+    else if(Upassword.valueMissing == false){
+        pError.style.visibility='hidden';
+    }
+    if(Uapples.valueMissing){
+        pError.innerHTML = "Ну хоч поїсти трохи... Яблука смачні";
+        pError.style.visibility='visible';   
+    }
+    else if(Uapples.valueMissing == false){
+        pError.style.visibility='hidden';
+    }
+    if( document.querySelector('#Uapples').value == "0"){
+        pError.innerHTML = "Ну хоч поїсти трохи... Яблука смачні";
+        pError.style.visibility='visible';   
+    }
+    if(document.querySelector('#Uthanks').value  !== "дякую"){
+        document.querySelector('#Uthanks').setCustomValidity("Фу, невдячний(-а)!")
+    }
+    else if(document.querySelector('#Uthanks').value  === "дякую"){
+        document.querySelector('#Uthanks').setCustomValidity("");
+    }
+    if(document.querySelector('#Uteach').checked == false){
+        pError.innerHTML = "Неосвічені живуть довше! Добре подумай!";
+        pError.style.visibility='visible';   
+    }
+    else if(document.querySelector('#Uteach').checked == true){
+        pError.style.visibility='hidden';
+    }
+
+})
 
     /*
 
