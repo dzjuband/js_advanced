@@ -23,12 +23,123 @@
 
         + бонус додати красиві картинки з погодою
     */
-    window.addEventListener("load", function () {
+      var first = ['Сонячно', 'Легкий снігопад', 'Сильний снігопад'];
+      var second = ['Сонячно', 'Дощ', 'Вітер', 'Можливий дощ'];
+      var third = ['Сонячно', 'Засуха', 'Вітер'];
+
       var countries = ['Ukraine', 'Poland', 'USA'];
       var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Charkiv'];
       var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
       var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+
+    window.addEventListener("load", function () {
+
+      var countriesSelect = document.querySelector('#countries');
+
+          for(let i=0;i<countries.length;i++){
+            let option = document.createElement('option');
+            option.innerText = countries[i];
+            countriesSelect.appendChild(option);
+          }
+          
+          document.querySelector('#countries').style.marginRight = "15px";
+          
+          createSecondSelect()
+          countriesSelect.addEventListener('change',function(){
+            document.querySelector('#city').remove();
+            createSecondSelect();
+          });
     });
+
+    function createSecondSelect(){
+      let secSel = document.createElement('select');
+      secSel.id = "city";
+
+      document.querySelector('#countries').after(secSel);
+      if(document.querySelector('#countries').value == "Ukraine"){
+        for(let i=0;i < ukraineCity.length; i++){
+            let option = document.createElement('option');
+            option.innerText = ukraineCity[i];
+            secSel.appendChild(option);
+        }
+      }
+      if(document.querySelector('#countries').value == "Poland"){
+        for(let i=0;i < polandCity.length; i++){
+            let option = document.createElement('option');
+            option.innerText = polandCity[i];
+            secSel.appendChild(option);
+        }
+      }
+      if(document.querySelector('#countries').value == "USA"){
+        for(let i=0;i < usaCity.length; i++){
+            let option = document.createElement('option');
+            option.innerText = usaCity[i];
+            secSel.appendChild(option);
+        }
+      }
+      generateString();
+      secSel.addEventListener('change',function(){
+        generateString()
+      })
+    }
+
+    function getRandomArbitrary(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function generateString(){
+      let tmp =  getRandomArbitrary(-10,40);
+        let Status = 0;
+        var tmpStr = '';
+        var checkStatus = ''
+        if(tmp>=-10 && tmp<=0){
+           Status = getRandomArbitrary(0,2);
+           tmpStr = document.querySelector('#countries').value+' '+document.querySelector('#city').value+' '+first[Status]+' '+tmp+" "+"градусів";
+           checkStatus = first[Status];
+        }
+        if(tmp>=0 && tmp<=30){
+           Status = getRandomArbitrary(0,4);
+           tmpStr = document.querySelector('#countries').value+' '+document.querySelector('#city').value+' '+second[Status]+' '+tmp+" "+"градусів";
+           checkStatus = second[Status];
+        }
+        if(tmp>=30 && tmp<=40){
+           Status = getRandomArbitrary(0,2);
+           tmpStr = document.querySelector('#countries').value+' '+document.querySelector('#city').value+' '+third[Status]+' '+tmp+" "+"градусів";
+           checkStatus = third[Status];
+        }
+        let img = document.createElement('img');
+        img.style.width ="400px";
+        img.style.htigth ="400px";
+        img.style.display="block";
+
+        switch (checkStatus) {
+          case 'Сонячно':{
+            img.src = "img/sonyachno.jpg";break;
+          }
+          case 'Легкий снігопад':{
+            img.src = "img/lowSnow.jpg";break;
+          }
+          case 'Сильний снігопад':{
+            img.src = "img/silsnig.jpeg";break;
+          }
+          case 'Дощ':{
+            img.src = "img/dos4.jpg";break;
+          }
+          case 'Вітер':{
+            img.src = "img/viter.jpeg";break;
+          }
+          case 'Можливий дощ':{
+            img.src = "img/mojldos4.jpg";break;
+          }
+          case 'Засуха':{
+            img.src = "img/zasuha.jpg";break;
+          }
+
+        }
+
+        document.querySelector("#result").innerHTML = tmpStr;
+        document.querySelector("#result").appendChild(img);
+    }
   </script>
 </head>
 <body>
