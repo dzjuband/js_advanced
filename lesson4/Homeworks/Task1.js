@@ -102,10 +102,9 @@ document.querySelector('#Validate').addEventListener('click',function(){
         document.querySelector('#Uname').setCustomValidity("")
     }
 
-    console.log(Uemail.valueMissing);
-    if(Uemail.valueMissing){
+   
+    if(Uemail.valueMissing){ console.log(Uemail.valueMissing);
         document.querySelector('#Uemail').setCustomValidity("Ну й дарма, не отримаєш бандероль із яблуками!");
-
     }
     else if(Uemail.valid == false){
         document.querySelector('#Uemail').setCustomValidity("");
