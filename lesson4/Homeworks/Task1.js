@@ -82,11 +82,6 @@ fm.innerHTML+='<input type="submit" style="margin-right:10px" id="submtbuttn" va
 
 fm.innerHTML+='<input type="button" id="Validate" value="Validate">';
 
-var pError = document.createElement('p');
-pError.style.background = "red";
-
-fm.appendChild(pError);
-
 let Uname = document.querySelector('#Uname').validity;
 let Uemail = document.querySelector('#Uemail').validity;
 let Upassword = document.querySelector('#Upassword').validity;
@@ -99,40 +94,38 @@ fm.addEventListener('submit',function(e){
 
 })
 document.querySelector('#Validate').addEventListener('click',function(){
-
+    fm.checkValidity();
     if(Uname.valueMissing){
-        pError.innerHTML = "Як тебе звуть друже?!";
-        pError.style.visibility='visible';   
+        document.querySelector('#Uname').setCustomValidity("Як тебе звуть друже?!")
     }
     else if(Uname.valueMissing == false){
-        pError.style.visibility='hidden';
+        document.querySelector('#Uname').setCustomValidity("")
     }
 
-    if(Uemail.valid == false){
-        pError.innerHTML = "Ну й дарма, не отримаєш бандероль із яблуками!";
-        pError.style.visibility='visible';
+    console.log(Uemail.valueMissing);
+    if(Uemail.valueMissing){
+        document.querySelector('#Uemail').setCustomValidity("Ну й дарма, не отримаєш бандероль із яблуками!");
+
     }
-    else if(Uemail.valid == true){
-        pError.style.visibility='hidden';
+    else if(Uemail.valid == false){
+        document.querySelector('#Uemail').setCustomValidity("");
     }
 
     if(Upassword.valueMissing){
-        pError.innerHTML = "Я нікому не скажу наш секрет";
-        pError.style.visibility='visible';   
+         document.querySelector('#Upassword').setCustomValidity("Я нікому не скажу наш секрет");
     }
     else if(Upassword.valueMissing == false){
-        pError.style.visibility='hidden';
+        document.querySelector('#Upassword').setCustomValidity("");
     }
     if(Uapples.valueMissing){
-        pError.innerHTML = "Ну хоч поїсти трохи... Яблука смачні";
-        pError.style.visibility='visible';   
+
+        document.querySelector('#Uapples').setCustomValidity( "Ну хоч поїсти трохи... Яблука смачні");
     }
     else if(Uapples.valueMissing == false){
-        pError.style.visibility='hidden';
+        document.querySelector('#Uapples').setCustomValidity("");
     }
     if( document.querySelector('#Uapples').value == "0"){
-        pError.innerHTML = "Ну хоч поїсти трохи... Яблука смачні";
-        pError.style.visibility='visible';   
+        document.querySelector('#Uapples').setCustomValidity( "Ну хоч поїсти трохи... Яблука смачні");
     }
     if(document.querySelector('#Uthanks').value  !== "дякую"){
         document.querySelector('#Uthanks').setCustomValidity("Фу, невдячний(-а)!")
@@ -141,13 +134,13 @@ document.querySelector('#Validate').addEventListener('click',function(){
         document.querySelector('#Uthanks').setCustomValidity("");
     }
     if(document.querySelector('#Uteach').checked == false){
-        pError.innerHTML = "Неосвічені живуть довше! Добре подумай!";
-        pError.style.visibility='visible';   
+         document.querySelector('#Uteach').setCustomValidity("Неосвічені живуть довше! Добре подумай!");
+        
     }
     else if(document.querySelector('#Uteach').checked == true){
-        pError.style.visibility='hidden';
+        document.querySelector('#Uteach').setCustomValidity("");
     }
-
+    fm.reportValidity();
 })
 
     /*
