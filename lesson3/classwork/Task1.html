@@ -52,27 +52,27 @@
 
       */
       let doWork  = function(){
-          if(ListCount>=5){
-            AddToList.removeEventListener('click',doWork);
-            AddToList.disabled = true;
-            Receiver.value = '';  
+          if (listCount>=5){
+            addToList.removeEventListener('click',doWork);
+            addToList.disabled = true;
+            receiver.value = '';  
           }
-          if(ListCount<5){
+          else {
             let tmpli = document.createElement('li');
-            tmpli.innerHTML = Receiver.value;
+            tmpli.innerHTML = receiver.value;
             list.appendChild(tmpli);
-            Receiver.value = '';  
-            ListCount++;
+            receiver.value = '';  
+            listCount++;
           }
          
         }
 
-      var ListCount = 0;
-      let Receiver = document.querySelector('#Receiver');
+      var listCount = 0;
+      let receiver = document.querySelector('#Receiver');
       let list = document.querySelector('#list');
-      let AddToList = document.querySelector('#AddToList');
+      let addToList = document.querySelector('#AddToList');
 
-        let click = AddToList.addEventListener('click', doWork);
+      let click = AddToList.addEventListener('click', doWork);
 
       
     </script>
