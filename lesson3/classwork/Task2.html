@@ -56,7 +56,6 @@
       var resultBlock = document.getElementById('result');
       let newIMG = document.createElement('img');
 
-      console.log(buttons);
 
       var iconsObj = {
         house:  './icons/free-icon-fire-extinguisher-7374057.png',
@@ -67,7 +66,6 @@
       function showIcon(e){
         var val = e.target.innerText.toLowerCase();
         console.log(e);
-
       }
 
       buttons.forEach( (btn) => {
@@ -110,19 +108,22 @@
             if(document.querySelector('.imgClass').classList.contains('Tree')){
               let ttt = document.createElement('img');
               ttt.src=treeArray[randNum];
-              ttt.style.width="400px";ttt.style.heigth ="400px";
+              ttt.style.width="400px";
+              ttt.style.heigth ="400px";
               resultBlock.appendChild(ttt);
             }
             if(document.querySelector('.imgClass').classList.contains('House')){
               let ttt = document.createElement('img');
               ttt.src=houseArray[randNum];
-              ttt.style.width="400px";ttt.style.heigth ="400px";
+              ttt.style.width="400px";
+              ttt.style.heigth ="400px";
               resultBlock.appendChild(ttt);
             }
             if(document.querySelector('.imgClass').classList.contains('Plane')){
               let ttt = document.createElement('img');
               ttt.src=planeArray[randNum];
-              ttt.style.width="400px";ttt.style.heigth ="400px";
+              ttt.style.width="400px";
+              ttt.style.heigth ="400px";
               resultBlock.appendChild(ttt);
             }
 
