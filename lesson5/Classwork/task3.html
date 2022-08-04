@@ -35,4 +35,26 @@
       /* ... делать что-то с obj[key] ...
     // }
 */
+function Dog(name, breed){
+  this.name = name;
+  this.breed = breed;
+  this.status = null;
+
+  this.changeStatus = function(){
+    if( this.status === "the dog is running" ) {
+      this.status = "the dog is eating";
+    }
+    else{
+      this.status = "the dog is running";
+    }
+  },
+  this.showProps = function(){
+    let self = this;
+      for (key in self) {
+        console.log( key, self[key] );
+      }  
+  }
+}
+
+var dog = new Dog('name','Spaniel');
 </script>

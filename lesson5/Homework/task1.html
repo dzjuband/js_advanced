@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="CommentsFeed"></div>
+</body>
+</html>
+<script>
+/* 1. Написать конструктор объекта комментария который принимает 3 аргумента
+    ( имя, текст сообщения, ссылка на аватаку);*/
+function Comment( name, text, avatarUrl ) {
+  this.name = name;
+  this.text = text;
+  this.avatarUrl = avatarUrl;
+  this.likes = 0;
+}
+
+/*
+ 3. Созадть функцию конструктор, которая принимает массив коментариев.
+      И выводит каждый из них на страничку.
+
+*/
+function Comment( arr ) {
+  if( arr instanceof Array ) {
+    this.arr = arr;
+    for(let i=0;i<this.arr.length;i++) {
+        document.write(this.arr[i]);
+        document.write("<br>");
+    }
+  }
+}
+
+
+Comment.prototype.avatarUrl = 'https://klike.net/uploads/posts/2019-05/1556708032_1.jpg';//+ Создать прототип, в котором будет содержаться ссылка на картинку по умлочанию
+Comment.prototype.likes = 0;
+Comment.prototype.addLikes = function() {//+ В прототипе должен быть метод который увеличивает счетик лайков
+  this.likes++;
+}
+
+var comm = new Comment('Juliet','this is me first comment','https://www.imgonline.com.ua/examples/bee-on-daisy.jpg');
+
+/*2. Создать массив из 4х комментариев.
+    var CommentsArray = [myComment1, myComment2...]*/
+var commArr = new Comment(['first comment', 'second comment', 'third comment', 'fourth comment']);
+
+/*
+
+  Задание:
+
+    1. Написать конструктор объекта комментария который принимает 3 аргумента
+    ( имя, текст сообщения, ссылка на аватаку);
+
+    {
+      name: '',
+      text: '',
+      avatarUrl: '...jpg'
+      likes: 0
+    }
+      + Создать прототип, в котором будет содержаться ссылка на картинку по умлочанию
+      + В прототипе должен быть метод который увеличивает счетик лайков
+
+    var myComment1 = new Comment(...);
+
+    2. Создать массив из 4х комментариев.
+    var CommentsArray = [myComment1, myComment2...]
+
+    3. Созадть функцию конструктор, которая принимает массив коментариев.
+      И выводит каждый из них на страничку.
+*/
+</script>
+
+
