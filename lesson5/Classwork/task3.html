@@ -41,7 +41,7 @@ function Dog(name, breed){
   this.status = null;
 
   this.changeStatus = function(){
-    if( this.status === "the dog is running" ) {
+    if( this.status === null ) {
       this.status = "the dog is eating";
     }
     else{
@@ -51,10 +51,13 @@ function Dog(name, breed){
   this.showProps = function(){
     let self = this;
       for (key in self) {
-        console.log( key, self[key] );
+        if( typeof self[key] !== 'function' ) {
+          console.log( key, self[key] );
+        }
+       
       }  
   }
 }
 
-var dog = new Dog('name','Spaniel');
+var dog = new Dog('Boddy','Spaniel');
 </script>

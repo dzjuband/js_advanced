@@ -26,12 +26,17 @@
 */
 let Train ={};
 Train.name = 'INTERCITY';
-Train.speed = 300;
+Train.speed = 0;
 Train.count_pass = 1000;
 Train.rolling  =  function (){
-    console.log(`Поезд ${this.name} везет ${ this.count_pass} со скоростью ${this.speed}`);
+    Train.speed = 300;
+    console.log(`Поезд ${this.name} везет ${ this.count_pass} со скоростью ${this.speed} `);
+}
+Train.standing = function(){
+    this.speed = 0;
+    console.log(`Поезд ${this.name} остановился. Скорость скоростью 0`);
 }
 Train.get_pass = function(x){
-    this.count_pass+=x;
+    this.count_pass+=ParseInt(x);
 }
 </script>
