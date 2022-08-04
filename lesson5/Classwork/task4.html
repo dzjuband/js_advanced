@@ -44,4 +44,73 @@
       String.fromCharCode(189, 43, 190, 61) // ½+¾
 
 */
+/*Написать функцию, которая будет принимать в себя слово и количество
+    симовлов на которые нужно сделать сдвиг внутри.*/
+function shiftChars(str, shiftNumber) {
+    let tmp  = '';
+    for(let i=0;i<str.length;i++){
+            
+        if(str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 90) {
+            if((str.charCodeAt(i) + shiftNumber) > 90){
+              tmp += String.fromCharCode(64 + str.charCodeAt(i) + shiftNumber - 90);
+              
+            }
+            else {
+              tmp += String.fromCharCode(str.charCodeAt(i) + shiftNumber);
+            }
+
+        }
+        else if(str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 122) {
+          if(str.charCodeAt(i) + shiftNumber > 122){
+              tmp += String.fromCharCode(96 + str.charCodeAt(i) + shiftNumber - 122 );
+            
+            }
+            else{
+              tmp += String.fromCharCode(str.charCodeAt(i) + shiftNumber);
+
+            }
+        }
+        else{
+            tmp += String.fromCharCode(str.charCodeAt(i));
+        }
+    }
+    return tmp;
+}    
+
+function unshiftChars(str, shiftNumber) {
+    let tmp  = '';
+    for(let i=0;i<str.length;i++){
+            
+        if(str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 90) {
+            if((str.charCodeAt(i) - shiftNumber) < 65){
+              
+              tmp += String.fromCharCode(90 - (64 - (str.charCodeAt(i) - shiftNumber)));
+            
+            }
+            else {
+              tmp += String.fromCharCode(str.charCodeAt(i) - shiftNumber);
+            }
+
+        }
+        else if(str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 122) {
+          if(str.charCodeAt(i) + shiftNumber > 122){
+              tmp += String.fromCharCode(122 - (96 - (str.charCodeAt(i) - shiftNumber)));
+            
+            }
+            else{
+              tmp+= String.fromCharCode(str.charCodeAt(i) + shiftNumber);
+
+            }
+        }
+        else{
+            tmp += String.fromCharCode(str.charCodeAt(i));
+        }
+    }
+    return tmp;
+}    
+
+let a = shiftChars("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.", 13); 
+console.log(a);
+
+console.log(shiftChars(a, 13))
 </script>
