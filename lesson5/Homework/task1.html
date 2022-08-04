@@ -25,7 +25,7 @@ function Comment( name, text, avatarUrl ) {
       И выводит каждый из них на страничку.
 
 */
-function Comment( arr ) {
+function Comment2( arr ) {
   if( arr instanceof Array ) {
     this.arr = arr;
     for(let i=0;i<this.arr.length;i++) {
@@ -42,11 +42,17 @@ Comment.prototype.addLikes = function() {//+ В прототипе должен 
   this.likes++;
 }
 
+Comment2.prototype.avatarUrl = 'https://klike.net/uploads/posts/2019-05/1556708032_1.jpg';//+ Создать прототип, в котором будет содержаться ссылка на картинку по умлочанию
+Comment2.prototype.likes = 0;
+Comment2.prototype.addLikes = function() {//+ В прототипе должен быть метод который увеличивает счетик лайков
+  this.likes++;
+}
+
 var comm = new Comment('Juliet','this is me first comment','https://www.imgonline.com.ua/examples/bee-on-daisy.jpg');
 
 /*2. Создать массив из 4х комментариев.
     var CommentsArray = [myComment1, myComment2...]*/
-var commArr = new Comment(['first comment', 'second comment', 'third comment', 'fourth comment']);
+var commArr = new Comment2(['first comment', 'second comment', 'third comment', 'fourth comment']);
 
 /*
 

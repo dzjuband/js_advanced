@@ -46,7 +46,7 @@
 */
 /*Написать функцию, которая будет принимать в себя слово и количество
     симовлов на которые нужно сделать сдвиг внутри.*/
-function shiftChars(str, shiftNumber) {
+function shiftChars(shiftNumber, str ) {
     let tmp  = '';
     for(let i=0;i<str.length;i++){
             
@@ -77,7 +77,7 @@ function shiftChars(str, shiftNumber) {
     return tmp;
 }    
 
-function unshiftChars(str, shiftNumber) {
+function unshiftChars( shiftNumber, str) {
     let tmp  = '';
     for(let i=0;i<str.length;i++){
             
@@ -109,8 +109,17 @@ function unshiftChars(str, shiftNumber) {
     return tmp;
 }    
 
-let a = shiftChars("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.", 13); 
-console.log(a);
 
-console.log(shiftChars(a, 13))
+console.log("String defore: GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.");
+//let a = shiftChars("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.", 13); 
+//console.log(a);
+//console.log(shiftChars(a, 13))
+
+let tmp = shiftChars.bind(null, 13);
+let showRes = tmp("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.");
+console.log("after shifting : "+showRes);
+let tmp2 = unshiftChars.bind(null, 13);
+let showRes2 = tmp2(showRes);
+
+console.log("after unshifting : "+showRes2);
 </script>

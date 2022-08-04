@@ -34,7 +34,7 @@ Train.rolling  =  function (){
 }
 Train.standing = function(){
     this.speed = 0;
-    console.log(`Поезд ${this.name} остановился. Скорость скоростью 0`);
+    console.log(`Поезд ${this.name} остановился. Скорость скоростью ${this.speed}`);
 }
 Train.get_pass = function(x){
     this.count_pass+=ParseInt(x);
