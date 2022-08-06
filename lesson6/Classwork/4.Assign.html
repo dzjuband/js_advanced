@@ -5,6 +5,41 @@
     <title>Classwork</title>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      var firstObj = {};
+      var secondObj = {};
+        document.querySelectorAll('button[type="submit"]').forEach(function( item ) {
+          item.addEventListener('click', function( e ) {
+            e.preventDefault();
+            let key = this.parentElement.querySelector('input[name="key"]');
+            let val = this.parentElement.querySelector('input[name="value"]');
+            let codeHTML = this.parentElement.parentElement.querySelector('.createResult code').innerText;
+            let tmpOBJ = eval('('+codeHTML+')');
+
+            if(key.length != 0 && val.length != 0) {
+              tmpOBJ[key.value] = val.value;
+            }
+            let tmpResString = "{\n";
+            for (var prop in tmpOBJ) {
+              tmpResString += prop + ":" + '"' + tmpOBJ[prop] + '"' + ",\n";
+            }
+             tmpResString += '}';
+             this.parentElement.parentElement.querySelector('.createResult code').innerText = tmpResString;
+        })
+          
+        })
+        let btnUnion = document.querySelector('.resultBlock > button')
+        btnUnion.addEventListener('click', function(e){
+          let codes = document.querySelectorAll('code');
+          let objs = [];
+          codes.forEach(function(item){
+            objs.push(eval('('+item.outerText+')'));
+          })
+
+          document.querySelector('#result').innerHTML = JSON.stringify(Object.assign({}, objs[0], objs[1]))
+        })
+      })
+      
     /*
       Завдання:
          1. Використовуючи інтерфейс який є на сторінці, написати візуальний
@@ -21,12 +56,13 @@
          * Змінювати HTML можна.
 
     */
+
     </script>
 </head>
 <body>
   <div class="wrap">
       <div class="assigned">
-        <form class="ObjForm">
+        <form class="ObjForm1">
             <input name="key" placeholder="Enter your key"/>
             <input name="value" placeholder="Enter your value"/>
             <button type="submit">Send</button>
@@ -48,7 +84,7 @@
       </div>
 
       <div class="assigned">
-        <form class="ObjForm">
+        <form class="ObjForm2">
             <input name="key" placeholder="Enter your key"/>
             <input name="value" placeholder="Enter your value"/>
             <button type="submit">Send</button>
@@ -98,6 +134,9 @@
         }
         .createResult header{
           font-weight: 700;
+        }
+        .createResult{
+          width: 200px;
         }
       </style>
 </body>
