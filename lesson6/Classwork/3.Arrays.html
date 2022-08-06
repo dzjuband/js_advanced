@@ -3,59 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <title>Classwork</title>
-
-    <script>
-
-    /*
-      Завдання:
-       1. За допомогою методів викладених нижче, переформатувати ITEA_COURSES на масив, який містить довжину рядків кожного з елементів.
-       2. Відфільтрувати масив ITEA_COURSES за абеткою.
-           + Бонусний бал. Вивести на сторінку списком
-       3. Реалізація функції пошуку за масивом ITEA_COURSES.
-           + Бонусний бал. Вивести на сторінку інпут і кнопку за якою спрацьовуватиме пошук.
-    */
-
-    const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
-
-    /*
-      Завдання 2:
-       Написати фільтр масиву за:
-       Актору, тривалості
-
-       Бонус:
-         Зробити графічну оболонку для програми:
-         - Селект зі списком акторів
-         - Селект або інпут із тривалістю
-         - Результат у вигляді списку фільмів
-    */
-
-      var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
-      var movies = [
-            {
-              name: "Lord of the Rigs",
-              duration: 240,
-              starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
-            },
-            {
-              name: "Star Wars: Episode I - The Phantom Menace",
-              duration: 136,
-              starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
-            },
-            {
-              name: "Fargo",
-              duration: 100,
-              starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
-            },
-            {
-            name: "V for Vendetta",
-            duration: 150,
-            starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
-          }
-        ];
-
-    </script>
 </head>
+<style>
+  .arrayFind{
+    margin-bottom: 10px;
+  }
+</style>
 <body>
-  
+  <div class="listLI"></div>
+  <div class="arrayFind"></div>
+  <div class="listFilms"></div>
+  <div class="listFilmsResult"></div>
 </body>
 </html>
+<script>
+window.onload = function() {
+  /*
+    Завдання:
+     1. За допомогою методів викладених нижче, переформатувати ITEA_COURSES на масив, який містить довжину рядків кожного з елементів.
+     2. Відфільтрувати масив ITEA_COURSES за абеткою.
+         + Бонусний бал. Вивести на сторінку списком
+     3. Реалізація функції пошуку за масивом ITEA_COURSES.
+         + Бонусний бал. Вивести на сторінку інпут і кнопку за якою спрацьовуватиме пошук.
+  */
+
+  const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+  
+  let ITEA_COURSES_NUMBERS = [];//1. За допомогою методів викладених нижче, переформатувати ITEA_COURSES на масив, який містить довжину рядків кожного з елементів.
+  ITEA_COURSES.map(item=>{
+    ITEA_COURSES_NUMBERS.push(item.length)
+  });
+  console.log("length array: "+ITEA_COURSES_NUMBERS);
+  console.log("filtered: "+ITEA_COURSES.sort());//. Відфільтрувати масив ITEA_COURSES за абеткою.
+
+  let ul = document.createElement('ul');// + Бонусний бал. Вивести на сторінку списком
+  ul.id="listCourses";
+  ITEA_COURSES.map(item => {
+    let li = document.createElement('li');
+    li.innerHTML = item;
+    ul.appendChild(li);
+  });
+
+  document.querySelector('.listLI').appendChild(ul);
+
+  let inpt = document.createElement('input');// Бонусний бал. Вивести на сторінку інпут і кнопку за якою спрацьовуватиме пошук.
+  inpt.id = "searchInput";
+  inpt.style.marginRight = "10px";
+  document.querySelector('.arrayFind').appendChild(inpt);
+  let btn = document.createElement('button');
+  btn.id = "makeSearch";
+  btn.innerHTML = "search!";
+  document.querySelector('.arrayFind').appendChild(btn);
+
+  document.addEventListener('click', function(e) {
+
+    if (e.target.id == 'makeSearch' ) {
+
+      document.querySelectorAll('#listCourses > li').forEach( item => {
+        item.style.background = "white";
+      });
+
+        document.querySelectorAll('#listCourses > li').forEach(item => {
+          if(item.innerHTML.toLowerCase().indexOf(inpt.value.toLowerCase()) >= 0){
+            item.style.background = 'red';
+          }
+
+        });
+
+     }
+
+ });
+ document.addEventListener('change', function(e) {
+  if (e.target.id == 'makeSearch' || e.target.id == 'duration') {
+    showSortedFilms(movies);
+  }
+})
+ 
+
+  /*
+    Завдання 2:
+     Написати фільтр масиву за:
+     Актору, тривалості
+
+     Бонус:
+       Зробити графічну оболонку для програми:
+       - Селект зі списком акторів
+       - Селект або інпут із тривалістю
+       - Результат у вигляді списку фільмів
+  */
+let actList = document.createElement('select');
+actList.id  = "actList";
+actList.style.marginRight = "10px";
+
+let duration = document.createElement('select');
+duration.id  = "duration";
+
+document.querySelector('.listFilms').appendChild(actList);
+document.querySelector('.listFilms').appendChild(duration);
+
+
+
+    var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman'];
+    
+    var movies = [
+          {
+            name: "Lord of the Rigs",
+            duration: 240,
+            starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+          },
+          {
+            name: "Star Wars: Episode I - The Phantom Menace",
+            duration: 136,
+            starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+          },
+          {
+            name: "Fargo",
+            duration: 100,
+            starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+          },
+          {
+          name: "V for Vendetta",
+          duration: 150,
+          starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+        }
+      ];
+
+
+    for(let i=0; i< stars.length; i++){
+      let opt =  document.createElement('option');
+      opt.innerHTML = stars[i];
+      actList.appendChild(opt);
+    }
+    for(let i=0; i< movies.length; i++){
+      let opt =  document.createElement('option');
+      opt.innerHTML = movies[i].duration;
+      duration.appendChild(opt);
+    }
+    
+    showSortedFilms(movies, document.querySelector('#actList').value)
+}
+
+function showSortedFilms(arr){
+ 
+  let listFilmsResult = document.querySelector('.listFilmsResult');
+  listFilmsResult.innerHTML = '';
+  let tmpUL = document.createElement('ul');
+
+  listFilmsResult.appendChild(tmpUL);
+  
+  arr.forEach(item => {
+    if(item.starring.find((element) => { return element.indexOf(document.querySelector('#actList')) }) !== undefined /*&& item.duration > duration.value*/){
+      let tmpOption = document.createElement('li');
+      tmpOption.innerHTML = item.name;
+      tmpUL.appendChild(tmpOption);
+    }
+  })
+}
+  </script>
