@@ -79,7 +79,6 @@ window.onload = function() {
   }
 })
  
-
   /*
     Завдання 2:
      Написати фільтр масиву за:
@@ -103,7 +102,7 @@ document.querySelector('.listFilms').appendChild(duration);
 
 
 
-    var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman'];
+    var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor','Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman'];
     
     var movies = [
           {
@@ -114,7 +113,7 @@ document.querySelector('.listFilms').appendChild(duration);
           {
             name: "Star Wars: Episode I - The Phantom Menace",
             duration: 136,
-            starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+            starring: [ 'Ewan McGregor','Liam Neeson', 'Natalie Portman']
           },
           {
             name: "Fargo",
@@ -139,24 +138,40 @@ document.querySelector('.listFilms').appendChild(duration);
       opt.innerHTML = movies[i].duration;
       duration.appendChild(opt);
     }
+
+    showSortedFilms(movies);
+
+    actList.addEventListener('change', function(){
+
+      showSortedFilms(movies)
+    })
+
+    duration.addEventListener('change', function(){
+
+      showSortedFilms(movies)
+    })
     
-    showSortedFilms(movies, document.querySelector('#actList').value)
 }
 
 function showSortedFilms(arr){
- 
+
   let listFilmsResult = document.querySelector('.listFilmsResult');
   listFilmsResult.innerHTML = '';
   let tmpUL = document.createElement('ul');
 
   listFilmsResult.appendChild(tmpUL);
-  
-  arr.forEach(item => {
-    if(item.starring.find((element) => { return element.indexOf(document.querySelector('#actList')) }) !== undefined /*&& item.duration > duration.value*/){
-      let tmpOption = document.createElement('li');
-      tmpOption.innerHTML = item.name;
-      tmpUL.appendChild(tmpOption);
+
+  let actList = document.querySelector('#actList').value;
+  let duration = document.querySelector('#duration').value;
+
+  for(let i=0;i<arr.length;i++) {
+
+    let TmpIndex = arr[i].starring.indexOf(actList);
+    if(TmpIndex >= 0 && arr[i].duration >= duration){
+      let tmpLi = document.createElement('li');
+      tmpLi.innerHTML = arr[i].name;
+      tmpUL.appendChild(tmpLi);
     }
-  })
+  }
 }
   </script>
