@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Homework</title>
 </head>
+<style>
+.vl {
+    border-left: 6px solid green;
+    height: 100px;
+}
+</style>
 <body>
       <!--
         Створіть лічильник секунд, який починає звіт з 1 і закінчується на 30,
@@ -34,11 +40,13 @@
     });
 
     let restart = document.createElement('button');
+
     restart.id = 'restart';
     restart.innerHTML = "Restart!";
     restart.style.marginRight = "10px";
     restart.addEventListener('click', function(e){
-
+      clearInterval( myTimer );
+      
       if(following == 'normal'){
         count = 1;
       }
@@ -56,36 +64,40 @@
     let reverse = document.createElement('button');
     reverse.id = 'reverse';
     reverse.innerHTML = "Reverse!";
+    
     reverse.addEventListener('click', function(){
       following = (following =='normal') ? 'reverse' : 'normal';
-    })
+    });
 
     document.body.appendChild(stopBtn);
     document.body.appendChild(restart);
     document.body.appendChild(reverse);
     document.body.appendChild(divRes);
-    
+
 
     function getready() {
-      document.body.style.backgroundColor = getBackgroundColor();
-      if(following == 'normal') {
-        if (count <= 30) {
-          document.getElementById('result').innerHTML = count;
-          count++;
-        }
-        else {
-          clearInterval( myTimer );
+      if(count !=0 && count !=31){
+        document.body.style.backgroundColor = getBackgroundColor();
+          if(following == 'normal') {
+            if (count <= 30) {
+              document.getElementById('result').innerHTML = count;
+              ++count;
+            }
+            else {
+              clearInterval( myTimer );
+            }
+          }
+          if(following == 'reverse') {
+            if (count >= 1) {
+              document.getElementById('result').innerHTML = count;
+              --count;
+            }
+            else{
+              clearInterval( myTimer );
+            }
         }
       }
-      if(following == 'reverse') {
-        if (count >= 1) {
-          document.getElementById('result').innerHTML = count;
-          count--;
-        }
-        else{
-          clearInterval( myTimer );
-        }
-    }
+      
     }
 
 
