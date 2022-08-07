@@ -29,7 +29,7 @@ function Comment2( arr ) {
   if( arr instanceof Array ) {
     this.arr = arr;
     for(let i=0;i<this.arr.length;i++) {
-        document.write(this.arr[i]);
+        document.write(this.arr[i].name);
         document.write("<br>");
     }
   }
@@ -52,7 +52,7 @@ var comm = new Comment('Juliet','this is me first comment','https://www.imgonlin
 
 /*2. Создать массив из 4х комментариев.
     var CommentsArray = [myComment1, myComment2...]*/
-var commArr = new Comment2(['first comment', 'second comment', 'third comment', 'fourth comment']);
+var commArr = new Comment2([new Comment('first comment'), new Comment('second comment'), new Comment('third comment'), new Comment('fourth comment')]);
 
 /*
 
