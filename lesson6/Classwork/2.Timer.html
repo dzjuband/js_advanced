@@ -16,15 +16,84 @@
 
        + бонус: Зробити кнопки які вибирають режим, в якому йде відлік - звичайний від 0 до 30 або реверсивний від 30 до 0
       -->
-
-      
-      <script>
-        setInterval(
-            function(){
-                console.log("Hello", counter)
-                counter++;
-            },
-        1000);
-      </script>
 </body>
 </html>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let count  = 1;
+    let following = 'normal';
+
+    let  myTimer = setInterval(getready, 1000, following);
+    
+    let stopBtn = document.createElement('button');
+    stopBtn.id = 'stopBtn';
+    stopBtn.innerHTML = "Stop!";
+    stopBtn.style.marginRight = "10px";
+    stopBtn.addEventListener('click', function(e){
+        clearInterval( myTimer );
+    });
+
+    let restart = document.createElement('button');
+    restart.id = 'restart';
+    restart.innerHTML = "Restart!";
+    restart.style.marginRight = "10px";
+    restart.addEventListener('click', function(e){
+
+      if(following == 'normal'){
+        count = 1;
+      }
+      if(following == 'reverse'){
+        count = 30;
+      }
+
+      myTimer = setInterval(getready, 1000, following);
+      
+    });
+    
+    let divRes = document.createElement('div');
+    divRes.id="result";
+
+    let reverse = document.createElement('button');
+    reverse.id = 'reverse';
+    reverse.innerHTML = "Reverse!";
+    reverse.addEventListener('click', function(){
+      following = (following =='normal') ? 'reverse' : 'normal';
+    })
+
+    document.body.appendChild(stopBtn);
+    document.body.appendChild(restart);
+    document.body.appendChild(reverse);
+    document.body.appendChild(divRes);
+    
+
+    function getready() {
+      document.body.style.backgroundColor = getBackgroundColor();
+      if(following == 'normal') {
+        if (count <= 30) {
+          document.getElementById('result').innerHTML = count;
+          count++;
+        }
+        else {
+          clearInterval( myTimer );
+        }
+      }
+      if(following == 'reverse') {
+        if (count >= 1) {
+          document.getElementById('result').innerHTML = count;
+          count--;
+        }
+        else{
+          clearInterval( myTimer );
+        }
+    }
+    }
+
+
+  });
+  function getBackgroundColor(){
+      return '#'+Math.floor(Math.random()*16777215).toString(16)
+    }
+
+     
+    
+ </script>
