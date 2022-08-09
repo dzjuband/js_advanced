@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+<body>
+    <!-- 
+        Реалізувати успадкування за прикладом, наведеним на картинку inheritance
+         
+          class Man повинен мати поля
+             name
+             age
+             country
+         + методи з картинки
+        
+         Кожен метод повинен виводити у консолі всі поля + ім'я методу
+         WALK:
+             console.log(`Hi! My name is ${name}, and Im {age} years old. Im from ${country}, and I like to WALK a lot`)
+     -->
+</body>
+</html>
+<script>
+class Man {
+    constructor(name, age, country) {
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
+    walk() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to WALK a lot`);
+    }
+    eat() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to EAT a lot`);
+    }
+    drink() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to DRINK a lot`);
+    }
+}
+
+class Soldier extends Man {
+    constructor(name, age, country, soldierProp) {
+        super(name, age, country);
+        this.soldierProp = soldierProp;
+    }
+
+    shoot() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to SHOOTING a lot. Have my special prop: ${ this.soldierProp }`);
+    }
+}
+
+class Doctor extends Man {
+    constructor(name, age, country, doctorProp) {
+        super(name, age, country);
+        this.doctorProp = doctorProp;
+    }
+    cure() {
+        console.log(`Hi! My name is ${this.name}, and Im ${this.age} years old. Im from ${this.country}, and I like to CURRING a lot. Have my special prop: ${ this.doctorProp }`);
+    }
+}
+
+let varMan = new Man('Roman', 18, 'Kiev');
+let varSoldier = new Soldier ('Kositia', 28, 'Kerch', 'this is a property of Soldier');
+let varDoctor  = new Doctor('Vlad', 38, 'Kharkiv', 'this is a property of Doctor');
+
+function Man2 (name, age, country){
+    this.name = name;
+    this.age = age;
+    this.country = country;
+
+    this.walk = function() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to WALK a lot`);
+    }
+    this.eat = function() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to EAT a lot`);
+    }
+    this.drink = function() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to DRINK a lot`);
+    }
+}
+
+function Soldier2(name, age, country, soldierProp){
+    this.soldierProp = soldierProp;
+    this.shoot = function() {
+        console.log(`Hi! My name is ${ this.name }, and Im ${ this.age } years old. Im from ${ this.country }, and I like to SHOOTING a lot. Have my special prop: ${ this.soldierProp }`);
+    }
+}
+
+Soldier2.prototype = Man2;
+
+function Doctor2(name, age, country, doctorProp){
+    this.doctorProp = doctorProp;
+    this.cure = function () {
+        console.log(`Hi! My name is ${this.name}, and Im ${this.age} years old. Im from ${this.country}, and I like to CURRING a lot. Have my special prop: ${ this.doctorProp }`);
+    }
+}
+
+Doctor2.prototype = Man2;
+
+
+let varMan2 = new Man2('Roman', 18, 'Kiev');
+let varSoldier2 = new Soldier2 ('Kositia', 28, 'Kerch', 'this is a property of Soldier');
+let varDoctor2  = new Doctor2('Vlad', 38, 'Kharkiv', 'this is a property of Doctor');
+</script>
