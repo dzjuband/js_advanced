@@ -7,7 +7,20 @@
      <title>Document</title>
 </head>
 <body>
-     
+     <table>
+          <thead>
+               <tr>
+                    <th>#</th>
+                    <th>userName</th>
+                    <th>email</th>
+                    <th>Показати webiste</th>
+                    <th>Показати телефон</th>
+               </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+     </table>
 </body>
 </html>
 <script>
@@ -29,7 +42,63 @@
      Дані про сайт та номер телефону приховувати під час виведення та показувати під час кліку.
 
 */
-let res = fetch('https://jsonplaceholder.typicode.com/users')
-  .then((response) => {return response});
-console.log(res);
+async function getData(){
+  await fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response =>  response.json())
+  .then(response => response.forEach(element => {
+  
+     let tr = document.createElement('tr');
+     let td1 = document.createElement('td');
+     let td2 = document.createElement('td');
+     let td3 = document.createElement('td');
+     let td4 = document.createElement('td');
+     let td5 = document.createElement('td');
+     let tbody = document.querySelector('table tbody');
+
+     td1.innerHTML = element.id
+     td2.innerHTML = element.name
+     td3.innerHTML = element.email
+     td4.innerHTML = '<button class="showSite">showSite</button>';
+     td5.innerHTML = '<button class="showTel">showTel</button>';
+
+     tr.appendChild(td1);
+     tr.appendChild(td2);
+     tr.appendChild(td3);
+     tr.appendChild(td4);
+     tr.appendChild(td5);
+     tbody.appendChild(tr);
+  })); 
+
+  await function() {
+     document.querySelectorAll('.showSite').forEach( function (currentValue, currentIndex, listObj) {
+          
+          listObj[currentIndex].addEventListener('click', function(){ 
+               let currItem = this.closest('tr').firstChild.innerHTML;
+               fetch('https://jsonplaceholder.typicode.com/users').then(response =>  response.json()).then((response) => {
+                    for(let i = 0; i < response.length; i++) {
+                         if(response[i].id == currItem) {
+                              this.closest('td').innerHTML = response[i].website;
+                         }
+                    }
+               })
+          });  
+     });
+
+     document.querySelectorAll('.showTel').forEach( function (currentValue, currentIndex, listObj) {
+          
+          listObj[currentIndex].addEventListener('click', function(){ 
+               let currItem = this.closest('tr').firstChild.innerHTML;
+               fetch('https://jsonplaceholder.typicode.com/users').then(response =>  response.json()).then((response) => {
+                    for(let i = 0; i < response.length; i++) {
+                         if(response[i].id == currItem){
+                              this.closest('td').innerHTML = response[i].phone;
+                         }
+                    }
+               })
+          });  
+     })
+  }()
+}
+
+getData();
 </script>
