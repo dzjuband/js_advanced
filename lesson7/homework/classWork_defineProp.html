@@ -37,7 +37,24 @@
     - бонус, створити конструктор суперздатностей -> new Spell (name, spellFunc);
 */
 
-  class SuperDude {
+function Spell(obj){
+
+let self = this;
+Object.defineProperty(
+  self,
+  "name",
+  {
+    value: obj.name,
+    writable: false,
+    configurable: false,
+    enumerable: true
+  }
+);
+
+this.spell = obj.spell;
+} 
+
+class SuperDude {
     constructor(name, ArrSuperProp){
 
       this.name = name;
@@ -56,32 +73,15 @@
       );
       })
     }
-
   }
 
-  function Spell(obj){
-
-    let self = this;
-    Object.defineProperty(
-      self,
-      "name",
-      {
-        value: obj.name,
-        writable: false,
-        configurable: false,
-        enumerable: true
-      }
-    );
-
-    this.spell = obj.spell;
-  } 
-
-  let superPowers = [
-    new Spell({ name:'Invisibility', spell: function(){ return `${this.name} hide from you`} }),
-    new Spell({ name:'superSpeed', spell: function(){ return `${this.name} running from you`} }),
-    new Spell({ name:'superSight', spell: function(){ return `${this.name} see you`} }),
-    new Spell({ name:'superFroze', spell: function(){ return `${this.name} will froze you`} }),
-    new Spell({ name:'superSkin',  spell: function(){ return `${this.name} skin is unbreakable`} })
+document.addEventListener("DOMContentLoaded", function(){
+  var superPowers = [
+        new Spell({ name:'Invisibility', spell: function(){ return `${this.name} hide from you`} }),
+        new Spell({ name:'superSpeed', spell: function(){ return `${this.name} running from you`} }),
+        new Spell({ name:'superSight', spell: function(){ return `${this.name} see you`} }),
+        new Spell({ name:'superFroze', spell: function(){ return `${this.name} will froze you`} }),
+        new Spell({ name:'superSkin',  spell: function(){ return `${this.name} skin is unbreakable`} })
   ];
 
   superPowers.forEach(function(item){
@@ -95,14 +95,13 @@
         enumerable: false
       }
     );
-  });
+    });
 
-  let Luther = new SuperDude('Luther', superPowers);
-      //Тестування: Методи повинні працювати та виводити повідомлення.
-      // Luther.superSight();
-      // Luther.superSpeed();
-      // Luther.superFroze();
-      // Luther.Invisibility();
-      // Luther.superSkin();
-
+  var Luther = new SuperDude('Luther', superPowers); 
+  console.log(Luther.superSight());
+  console.log(Luther.superSpeed());
+  console.log(Luther.superFroze());
+  console.log(Luther.Invisibility());
+  console.log(Luther.superSkin());
+});
 </script>
