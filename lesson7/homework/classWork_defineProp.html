@@ -39,8 +39,22 @@
 
   class SuperDude {
     constructor(name, ArrSuperProp){
+
       this.name = name;
       this.ArrSuperProp = ArrSuperProp;
+      this.ArrSuperProp.forEach(item => {
+
+      Object.defineProperty(
+        this,
+        item.name,
+        {
+          value: item.spell,
+          writable: false,
+          configurable: false,
+          enumerable: true
+        }
+      );
+      })
     }
 
   }
