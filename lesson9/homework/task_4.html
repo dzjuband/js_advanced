@@ -1,3 +1,14 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+  <script>
+  let string  =  `RegExr +00 (000) 000-00-00 was created by gskinner.com, 1993 and is @com.ua asdasda@com.ua .gif proudly +00 (111) 002-00-30 hosted by [Media] Temple.Edit the Expression & Text @com.ua .jpg to see +00 (11) 220-02-01 matches. Roll over matches or the expression for details.png PCRE & JavaScript flavors of RegEx are supported. Validate your expression with Tests mode.The side bar includes a Cheatsheet, full Reference, and Help. You can also Save & Share with the Community, and view patterns you create or favorite in My Patterns.Explore results with the Tools below. Replace & List output custom results. Details lists capture groups. Explain describes your expression in plain English.`;
   /*
     Завдання:
      Копіювати текст із файлу RegExp.txt на сайт https://regexr.com/
@@ -12,3 +23,47 @@
        8. Знайти телефон написаний за патерном +00 (000) 000-00-00,
           де замість 0 може бути будь-яке число
   */
+  // 1. Усі слова.
+  var pattern = /\w+/g; // усі слова
+  var result = string.match(pattern);
+  console.log(result);
+
+  // 2. Усі збіги букв від a до e,
+  var pattern = /[a-e]/g ;
+  var result = string.match(pattern);
+  console.log(result);
+
+  //3. Року, наприклад 2004
+  var pattern = /[0-9][0-9][0-9][0-9]/g // усі слова
+  var result = string.match(pattern);
+  console.log(result);
+
+  //4. Слова загорнуті в [квадратні Кавички]
+  var pattern =/\[\w+\]/g ;
+  var result = string.match(pattern);
+  console.log(result);
+  
+  //5. Усі формати файлів .jpg / .png / .gif
+  var pattern =/\.(gif|jpg|png)/g;
+  var result = string.match(pattern);
+  console.log(result);
+
+  //6. Усі email com.ua
+  var pattern =/@com.ua/g;
+  var result = string.match(pattern);
+  console.log(result);  
+
+  //7. Всі слова написані з великої літери
+  var pattern =/[A-Z][a-z]+/g;
+  var result = string.match(pattern);
+  console.log(result);  
+
+  //  8. Знайти телефон написаний за патерном +00 (000) 000-00-00, де замість 0 може бути будь-яке число
+  var pattern =/\+[0-9][0-9]\s\([0-9][0-9][0-9]\)\s[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g;
+  var result = string.match(pattern);
+  console.log(result); 
+  </script>
+  </body>
+  </html>
+
+  
