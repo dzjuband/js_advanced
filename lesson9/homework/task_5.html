@@ -84,9 +84,9 @@
     
           document.body.addEventListener('click', function ( event ) {//відловити натискання на кнопку
             if(event.target.localName == "button"){
-              let id = event.target.closest('li').querySelector('span').dataset;
-              console.log(id);
-              // fetch('https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList/' + id,
+              let id = event.target.closest('li').querySelector('span').dataset.id;
+              // console.log(id);
+              // fetch('https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList.json/' + id,
               //   {method: 'DELETE'} ).then(res => {});
                 
                 event.target.closest('.listItem').remove();
