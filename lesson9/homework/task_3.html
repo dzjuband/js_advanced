@@ -21,38 +21,65 @@
         <textarea name="about"></textarea>
         <button>Send</button>
     </form>
-    <button id="showAll">show all(console)</button>
+    <button id="showAll">show all</button>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>UserID</th>
+            <th>title</th>
+            <th>text</th>
+            <th>likes</th>
+            <th>btns</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
     <script>
+        function Post(title, body, id, userId) {
+        this.userId =  userId === undefined ? getRNDM() : userId;//random
+        this.id =  id === undefined ? getRNDM() : id;//random
+        this.title = title;//input
+        this.body = body;//textarea
+        this.likes = 0;
+        
+        this.addLike = function() {
+            localStorage.removeItem(this.id); 
+            this.likes += 1;
+            localStorage.setItem(this.id, JSON.stringify(this));
+        }
+
+        this.render = function() {
+            localStorage.getItem(this.id) != null ? console.log(JSON.parse(localStorage.getItem(this.id))): "OBJECT DOES NOT EXISTS";   
+        }
+    }
+
+    let postsArr = [];
+
+    localStorage.clear();
 
     document.querySelector('form > button').onclick = function(e) {
         e.preventDefault();
-        let tmp = new Post();
-        localStorage.setItem(tmp._id, JSON.stringify(tmp));
+        let tmp = new Post(document.querySelector('input[name="title"]').value, document.querySelector('textarea[name="about"]').value);
+        localStorage.setItem(tmp.id, JSON.stringify(tmp));
+        postsArr.push(tmp);
         tmp.render();
+        RenderTable();
     }
+
     document.querySelector('#showAll').addEventListener('click',function() {
         fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json() ).then(res => {
             res.forEach(element => {
-                console.log(element);
+                postsArr.push(new Post(element.title, element.body, element.id, element.userId));
             });
+            
+            postsArr.forEach(item => {
+                localStorage.setItem(item.id, JSON.stringify(item));
+            });
+            RenderTable();
+            
         });
     });
-    
-    function Post(){
-        this._id = getRNDM();//random
-        this.title = document.querySelector('input[name="title"]').value;//input
-        this.body = document.querySelector('textarea[name="about"]').value;//textarea
-        this.likes = 0;
-    }
 
-    Post.prototype.addLike = function() {
-        this.likes +=1;
-    }
-
-    Post.prototype.render = function() {
-
-        localStorage.getItem(this._id) != null ? console.log(JSON.parse(localStorage.getItem(this._id))): "OBJECT DOS NOT EXISTS";   
-    }
 /*
 
     Завдання 3:
@@ -80,9 +107,53 @@
      - Можна було завантажити дані до класу з апі: https://jsonplaceholder.typicode.com/posts
 */
 
+function RenderTable() {
+    document.querySelector('table > tbody').innerHTML = '';
+    for(let b=0; b < postsArr.length; b++) {
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        let td4 = document.createElement('td');
+        let td5 = document.createElement('td');
+        let td6 = document.createElement('td');
+        
+        td1.innerHTML = postsArr[b].id;
+        td2.innerHTML = postsArr[b].userId;
+        td3.innerHTML = postsArr[b].title;
+        td4.innerHTML = postsArr[b].body;
+        td5.innerHTML = postsArr[b].likes; 
+        td6.innerHTML = `<button class="addLikes">add likes</button>`;
+        
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tr.appendChild(td6);
+        
+        document.querySelector('table > tbody').appendChild(tr);
+    }
+
+    let aa = document.querySelectorAll('.addLikes');
+            aa.forEach(item => {
+                
+                item.addEventListener('click', function (e) {
+                    let id = e.target.closest('tr').firstChild.innerHTML; //id з таблички
+                    postsArr.forEach(elem => {
+                        if(elem.id == id) {
+                            elem.addLike()
+                            RenderTable();
+                        }
+                    });
+                });
+            });
+}
+
 function getRNDM(){
     return Math.floor(Math.random() * 100000) + 1;
 }
-    </script>
+
+</script>
 </body>
 </html>
