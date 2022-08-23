@@ -42,7 +42,7 @@
 
         window.addEventListener("load", function () {
           checkData();
-
+          localStorage.clear()
           let AddToDo = document.getElementById('AddToDo');
           let toDoList = document.getElementById('toDoList');
           let btn = document.querySelectorAll('button');
@@ -61,7 +61,7 @@
               span.innerText = document.querySelector('#newToDo').value;
               span.dataset.id = getId();
                 
-              localStorage.setItem(span.dataset.id, JSON.stringify({id: span.dataset.id, text: span.innerText,}));
+              localStorage.setItem(span.dataset.id, JSON.stringify({id: span.dataset.id, text: span.innerText, chekced:'false'}));
 
               let button = document.createElement('button');
               button.innerText ="Remove";
@@ -83,20 +83,24 @@
           });
     
           document.body.addEventListener('click', function ( event ) {//відловити натискання на кнопку
+            let id = event.target.closest('li').querySelector('span').dataset.itentification;
+            console.log(id);
             if(event.target.localName == "button"){
-              let id = event.target.closest('li').querySelector('span').dataset.id;
-              // console.log(id);
-              // fetch('https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList.json/' + id,
-              //   {method: 'DELETE'} ).then(res => {});
-                
+              fetch(`https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList/${id}/.json`, {
+                method:'DELETE'
+              });
                 event.target.closest('.listItem').remove();
             }
             if(event.target.type == "checkbox") {
               if(event.target.checked == true){
-                event.target.nextSibling.nextSibling.style.display="none";
+                event.target.nextSibling.nextSibling.style.display = "none"; 
+                fetch(`https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList/${id}.json/`,
+                  {method: 'PATCH', body: JSON.stringify({'checked':'true'}) } ).then(res => {});
               }
               else{
-                event.target.nextSibling.nextSibling.style.display="inline-block";
+                event.target.nextSibling.nextSibling.style.display = "inline-block";
+                fetch(`https://l9h5-2bf68-default-rtdb.firebaseio.com/toDoList/${id}.json/`,
+                  {method: 'PATCH', body: JSON.stringify({'checked':'false'}) }).then(res => {});
               }
               
             }
@@ -127,8 +131,7 @@
                 span.classList.add('TodoText');
                 span.innerText = res[item].text;
                 span.dataset.id = res[item].id;
-                span.dataset.itentification = res[item].id;
-
+                span.dataset.itentification = item;
                 let button = document.createElement('button');
                 button.innerText ="Remove";
       
@@ -136,7 +139,8 @@
                 li.appendChild(span);
                 li.appendChild(button);
                 toDoList.append(li);
-                localStorage.setItem(res[item].id,JSON.stringify(res[item]));
+                res[item].checked = false;
+                localStorage.setItem(res[item].id, JSON.stringify(res[item]));
               }
            });
         }
