@@ -20,6 +20,29 @@
              Стояти -> Поїзд зупинився. Швидкість {Speed}
              Підібрати пасажирів -> Збільшує кількість пасажирів на Х
         */    
+
+        function Train () {
+            this.name = 'Intercity',
+            this.speed = 150,
+            this.countPass = 1000,
+            this.ride = function() {
+                this.speed = 150;
+                console.log(`Поїзд ${this.name} везе ${ this.countPass} зі швидкістю ${this.speed}`);
+            },
+            this. stay = function() {
+                this.speed = 0;
+                console.log(`Поїзд зупинився. Швидкість ${this.speed}`);
+            },
+            this.getpass = function() {
+                this.countPass += 100;
+            }
+        }
+
+        let tmp = new Train();
+        tmp.ride();
+        tmp.stay();
+        tmp.getpass();
+        tmp.ride();
     </script>
 </body>
 </html>
