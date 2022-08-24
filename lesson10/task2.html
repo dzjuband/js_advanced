@@ -45,10 +45,10 @@
     }
   </style>
   <script>
-    document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener("DOMContentLoaded", function() {
       
 
-      document.querySelector('#submit').addEventListener('click', function(e){
+      document.querySelector('#submit').addEventListener('click', function(e) {
        
         e.preventDefault();
         let login = document.querySelector('input[name="login"]');
@@ -60,28 +60,28 @@
         pas2.className = '';
 
         let agree = document.querySelector('#agree');
-        if(login.value == ''){
+        if(login.value == '') {
           login.classList.add('error');
         }
 
-        if(login.value != ''){
+        if(login.value != '') {
           login.classList.add('OK');
         }
 
-        if(pas1.value != pas2.value || pas1.value == '' || pas2.value == ''){
+        if(pas1.value != pas2.value || pas1.value == '' || pas2.value == '') {
           pas1.classList.add('error');
           pas2.classList.add('error');
         }
 
-        if(pas1.value == pas2.value && pas1.value != '' && pas2.value != ''){
+        if(pas1.value == pas2.value && pas1.value != '' && pas2.value != '') {
           pas1.classList.add('OK');
           pas2.classList.add('OK');
         }
 
       });
 
-      document.querySelector('input[type="checkbox"]').addEventListener('click', function(e){
-        e.target.checked ? document.querySelector('#submit').disabled = false : document.querySelector('#submit').disabled = true  ;
+      document.querySelector('input[type="checkbox"]').addEventListener('click', function(e) {
+        e.target.checked ? document.querySelector('#submit').disabled = false : document.querySelector('#submit').disabled = true;
       });
     });
   </script>

@@ -27,29 +27,28 @@ function HTMLClass(){
     this.labelPass = document.createElement('label');
     this.labelPassSecond = document.createElement('label');
  
-    this.close =  function(){
+    this.close = function() {
         this.modalForm.style.display = 'none';
     }  
 
-    this.show =  function(){
+    this.show = function() {
         this.modalForm.style.display = 'block';
     }
 
-    this.saveModalData = function(){
+    this.saveModalData = function() {
         let login = this.login.value;
         let name = this.name.value;
         let surname = this.surname.value;
         let age = this.age.value;
         let pass = this.pass.value;
         let passSecond = this.passSecond.value;
-        if(login == '' || name == '' || surname == '' )
-        localStorage.setItem(login, JSON.stringify({login, name, surname, age, pass, passSecond}));
-
+        if(login != '' && name != '' && surname != '' )
+            localStorage.setItem(login, JSON.stringify( {login, name, surname, age, pass, passSecond} ) );
     }
     
 }
 
-HTMLClass.prototype.init = function(){
+HTMLClass.prototype.init = function() {
     this.body.appendChild(this.container);
     this.container.id = "container";
 
@@ -81,27 +80,23 @@ HTMLClass.prototype.init = function(){
     this.titleTetx.id = 'titleTetx';
     this.btnClose.id = 'btnClose';
  
-    this.btnClose.addEventListener('click', this.close.bind(this));
-    this.btn.addEventListener('click', this.show.bind(this));
+    this.btnClose.addEventListener('click', this.close.bind(this) );
+    this.btn.addEventListener('click', this.show.bind(this) );
 
 }
 
-HTMLClass.prototype.styleButton = function(){
+HTMLClass.prototype.styleButton = function() {
     this.btn.id = 'showModal';
     this.btn.type = "button";
-    this.btn.value ="show modal"
+    this.btn.value = "show modal"
     this.btn.style.padding = '10px';
     this.btn.style.margin = "40px";
-
-    this.btn.addEventListener('click', function(e){
-       
-    })
 
     this.createModalContainer();
     this.createModalBody();
 }
 
-HTMLClass.prototype.createModalContainer = function(){
+HTMLClass.prototype.createModalContainer = function() {
     this.modalForm.style.borderRadius = '20px';
     this.modalForm.style.border = '1px solid black';
     this.modalContainer.style.paddingLeft = '150px';
@@ -118,7 +113,7 @@ HTMLClass.prototype.createModalContainer = function(){
     this.modalForm.appendChild(this.title);
 }
 
-HTMLClass.prototype.createModalBody = function(){
+HTMLClass.prototype.createModalBody = function() {
     this.modalForm.style.width = '600px';
 
     this.modalForm.style.backgroundColor = "white";
@@ -183,11 +178,11 @@ HTMLClass.prototype.createModalBody = function(){
     this.passSecond.style.marginBottom = '10px';
 
     this.login.style.width = '100%';
-    this.name.style.width  = '100%';
-    this.surname.style.width  = '100%';
-    this.age.style.width  = '100%';
-    this.pass.style.width  = '100%';
-    this.passSecond.style.width  = '100%';
+    this.name.style.width = '100%';
+    this.surname.style.width = '100%';
+    this.age.style.width = '100%';
+    this.pass.style.width = '100%';
+    this.passSecond.style.width = '100%';
 
     this.title.appendChild(this.titleTetx);
     this.title.appendChild(this.btnClose);
@@ -231,7 +226,7 @@ HTMLClass.prototype.modalFooter = function(){
     this.footerSaveBtn.addEventListener('click', this.saveModalData.bind(this))
 }
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
     let html = new HTMLClass();
     html.init();
 });

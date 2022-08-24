@@ -52,24 +52,21 @@
 -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
     let list  =  document.querySelector('#toDoList');
     
-    document.querySelector('#AddToDo').addEventListener('click', function(e){
+    document.querySelector('#AddToDo').addEventListener('click', function(e) {
         let newToDo =  document.querySelector('#newToDo').value;
-        if(newToDo != ''){
-            list.innerHTML+=`<li class="listItem">
-             <span class="TodoText">${newToDo}</span>
-             <button class="remove">Remove</button>
-         </li>`;   
+        if(newToDo != '') {
+            list.innerHTML += `<li class="listItem"><span class="TodoText">${newToDo}</span><button class="remove">Remove</button></li>`;   
         }
-        else{
+        else {
             alert('Empty input data!');
         }
     });
 
-    document.addEventListener('click',function(e){
-        if(e.target && e.target.classList.contains('remove')){
+    document.addEventListener('click',function(e) {
+        if(e.target && e.target.classList.contains('remove')) {
             console.dir(e.target.closest('li').remove())
         }
     });
