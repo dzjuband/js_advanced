@@ -42,6 +42,7 @@ function HTMLClass(){
         let age = this.age.value;
         let pass = this.pass.value;
         let passSecond = this.passSecond.value;
+        if(login == '' || name == '' || surname == '' )
         localStorage.setItem(login, JSON.stringify({login, name, surname, age, pass, passSecond}));
 
     }

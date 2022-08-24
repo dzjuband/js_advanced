@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+  <script>
+    /*
+        Завдання:
+         Зробити валідацію форми:
+         1. Логін / Пароль не може бути порожнім
+         2. те поле, яке не пройшло валідацію, підсвічувати червоним, яке пройшло - підсвічувати зеленим.
+         3. Поки користувач не згоден з угодою – кнопка відправки не активна
+    */
+  </script>
+</head>
+<body>
+  <form id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" />
+    <input type="password" name='pas2' placeholder="Повторите пароль" />
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить" disabled/>
+  </form>
+
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    .OK {
+        border: 1px solid green;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      
+
+      document.querySelector('#submit').addEventListener('click', function(e){
+       
+        e.preventDefault();
+        let login = document.querySelector('input[name="login"]');
+        let pas1 = document.querySelector('input[name="pas1"]');
+        let pas2 = document.querySelector('input[name="pas2"]');
+
+        login.className = '';
+        pas1.className = '';
+        pas2.className = '';
+
+        let agree = document.querySelector('#agree');
+        if(login.value == ''){
+          login.classList.add('error');
+        }
+
+        if(login.value != ''){
+          login.classList.add('OK');
+        }
+
+        if(pas1.value != pas2.value || pas1.value == '' || pas2.value == ''){
+          pas1.classList.add('error');
+          pas2.classList.add('error');
+        }
+
+        if(pas1.value == pas2.value && pas1.value != '' && pas2.value != ''){
+          pas1.classList.add('OK');
+          pas2.classList.add('OK');
+        }
+
+      });
+
+      document.querySelector('input[type="checkbox"]').addEventListener('click', function(e){
+        e.target.checked ? document.querySelector('#submit').disabled = false : document.querySelector('#submit').disabled = true  ;
+      });
+    });
+  </script>
+</body>
+</html>
